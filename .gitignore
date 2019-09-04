@@ -34,3 +34,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+*.meta
+TDDD23_TheGame/Assets/Decrepit Dungeon LITE/*
+TDDD23_TheGame/Assets/SampleScenes/*
+TDDD23_TheGame/Assets/SimpleCorridor/*
+TDDD23_TheGame/Assets/Standard Assets/*
+TDDD23_TheGame/Assets/Starfield Skybox/*
