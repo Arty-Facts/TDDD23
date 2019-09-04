@@ -17,7 +17,8 @@ public class WallGenarator : MonoBehaviour
 
         for(int x = 0; x < mapSize; x++)
         {
-            activeWallTiles.Add(Instantiate(wallTile, new Vector3((x-mapSize/2)*wallTileRadius, 0, 0), new Quaternion(0, 1, 0, 1)));
+            if ( (x-mapSize/2)*wallTileRadius != 0)
+                activeWallTiles.Add(Instantiate(wallTile, new Vector3((x-mapSize/2)*wallTileRadius, 0, 0), new Quaternion(0, 1, 0, 1)));
         }
         
     }
