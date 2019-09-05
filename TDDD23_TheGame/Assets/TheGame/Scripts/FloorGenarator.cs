@@ -49,7 +49,6 @@ public class FloorGenarator : MonoBehaviour
                 float dir = dist/Mathf.Abs(dist);
                 tile.transform.position = new Vector3((int)tile.transform.position.x - dir * mapSize*floorTileRadius, tile.transform.position.y, tile.transform.position.z );
             }
-            print (tile.transform.position);
             oldPos.x = (int) mainCharector.transform.position.x;
         }
     }
@@ -61,7 +60,6 @@ public class FloorGenarator : MonoBehaviour
                 float dir = dist/Mathf.Abs(dist);
                 tile.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y, (int)tile.transform.position.z - dir * mapSize*floorTileRadius);
             }
-            print (tile.transform.position);
             oldPos.z = (int) mainCharector.transform.position.z;
         }
     }
