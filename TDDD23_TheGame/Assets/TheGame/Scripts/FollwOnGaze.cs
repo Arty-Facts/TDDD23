@@ -9,7 +9,7 @@ public class FollwOnGaze : MonoBehaviour
     private GazeAware _gazeAware;
 	private GameObject mainCharector;
 	private bool wasSelected = false;
-    private float force = 800f;
+    private float force = 900f;
 	// Use this for initialization
 	void Start () {
 		_gazeAware = GetComponent<GazeAware>();
