@@ -54,7 +54,7 @@ public class WeaponsControler : MonoBehaviour
     }
     public void Hitt(GameObject usedAmmo){
         ammos.Remove(usedAmmo);
-        Destroy(usedAmmo, 0.1f);
+        Destroy(usedAmmo, 0.3f);
         selected = null;
         highlighter.transform.position = new Vector3(0,0,0);
     }

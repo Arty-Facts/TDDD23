@@ -6,12 +6,13 @@ using Tobii.Gaming;
 [RequireComponent(typeof(GazeAware))]
 public class TargetedOnGaze : MonoBehaviour
 {
-	public WeaponsControler weaponsControler;
     private GazeAware _gazeAware;
+	private static WeaponsControler weaponsControler;
 	private bool wasSelected = false;
 	// Use this for initialization
 	void Start () {
 		_gazeAware = GetComponent<GazeAware>();
+		weaponsControler = GameObject.Find("WeaponsControler").GetComponent<WeaponsControler>();
 	}
 	
 	// Update is called once per frame

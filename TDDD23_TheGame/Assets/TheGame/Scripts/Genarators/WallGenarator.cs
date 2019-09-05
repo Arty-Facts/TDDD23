@@ -7,7 +7,7 @@ public class WallGenarator : MonoBehaviour
     public GameObject wallTile;
     public GameObject mainCharector;
     private Vector3 oldPos = new Vector3(0,0,0);
-    private float wallTileRadius = 4f;
+    private float wallTileRadius = 6f;
     private int mapSize = 8;
 
     private List<GameObject> activeWallTiles = new List<GameObject>();
