@@ -8,7 +8,7 @@ public class FloorGenarator : MonoBehaviour
     public GameObject mainCharector;
     private Vector3 oldPos = new Vector3(0,0,0);
     private float floorTileRadius = 6f;
-    private int mapSize = 6;
+    private int mapSize = 10;
 
     private List<GameObject> activeFloorTiles = new List<GameObject>();
     // Start is called before the first frame update
