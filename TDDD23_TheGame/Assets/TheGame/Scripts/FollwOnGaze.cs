@@ -29,7 +29,7 @@ public class FollwOnGaze : MonoBehaviour
     private void hover(){
         Vector3 side = Vector3.Cross(mainCharector.transform.forward, Vector3.up);
         //transform.LookAt(mainCharector.transform.position);
-        Vector3 pos = mainCharector.transform.position + 2* mainCharector.transform.forward+ new Vector3(0,0.5f,0) - 0.8f*side;
+        Vector3 pos = mainCharector.transform.position + 2.5f* mainCharector.transform.forward+ new Vector3(0,0.5f,0) - 0.8f*side;
         GetComponent<Rigidbody>().AddForce((pos - transform.position) * force * Time.deltaTime);
     }
 }
