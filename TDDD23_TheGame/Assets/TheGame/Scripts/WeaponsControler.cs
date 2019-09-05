@@ -22,7 +22,7 @@ public class WeaponsControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        highlighter = Instantiate(debugHighlighter, new Vector3(0, 0, 0), Quaternion.identity);
+        highlighter = Instantiate(debugHighlighter, new Vector3(0, -10, 0), Quaternion.identity);
         
     }
 
@@ -50,13 +50,13 @@ public class WeaponsControler : MonoBehaviour
     
     public void ReleseSelected(){
         selected = null;
-        highlighter.transform.position = new Vector3(0,0,0);
+        highlighter.transform.position = new Vector3(0,-10,0);
     }
     public void Hitt(GameObject usedAmmo){
         ammos.Remove(usedAmmo);
         Destroy(usedAmmo, 0.3f);
         selected = null;
-        highlighter.transform.position = new Vector3(0,0,0);
+        highlighter.transform.position = new Vector3(0,-10,0);
     }
 
     private void hunt(){
