@@ -533,7 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a2833fce648d743bb22a457ef5192e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammo: {fileID: 2300632270134497574, guid: cd38bb6eb80e414468a2918caebd7793, type: 3}
+  ammo: {fileID: 1131035674522468156, guid: ce73d617256273b44bbc4c1bc60f907d, type: 3}
   debugHighlighter: {fileID: 5354732048082751581, guid: b0c8e9d43b8c6354fbc1b299237500e2,
     type: 3}
   mainCharector: {fileID: 628025834}
