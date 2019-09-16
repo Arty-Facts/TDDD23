@@ -5,24 +5,19 @@ using UnityEngine;
 public class TurretController : BaseController
 {
     public GameObject Turret;
-    public GameObject ammo;
-    public GameObject Target;  
-    public GameObject Mother;   
-    public GameObject debugHighlighter; 
+    public GameObject ammo;  
     private List<GameObject> Turrets = new List<GameObject>();
 
     private int capacity = 300;
     private float force = 500;
     private float speed = 3f;
-    private GameObject highlighter;
     private int counter = 0;
     // Start is called before the first frame update
     void Start()
     {
-        highlighter = Instantiate(debugHighlighter, transform.position, Quaternion.identity);
-        Turrets.Add(Instantiate(Turret,  new Vector3(38.1f, 0.35f, 6.2f), Quaternion.identity));
-        Turrets.Add(Instantiate(Turret,  new Vector3(37.4f, 0.25f, 8.7f), Quaternion.identity));
-        Turrets.Add(Instantiate(Turret,  new Vector3(36.5f, 0.35f, 6.2f), Quaternion.identity));
+        Turrets.Add(Instantiate(Turret,  new Vector3(0.8f, 0.35f, 1.7f), Quaternion.identity));
+        Turrets.Add(Instantiate(Turret,  new Vector3(0f, 0.25f, 4.1f), Quaternion.identity));
+        Turrets.Add(Instantiate(Turret,  new Vector3(-0.8f, 0.35f, 1.7f), Quaternion.identity));
     }
 
     // Update is called once per frame

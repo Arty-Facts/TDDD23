@@ -7,14 +7,12 @@ public class BaseMovment : MonoBehaviour
     protected Transform selected; 
     public float Thrust = 10000f;
     public float RotationSpeed = 100f;
-    void Start()
-    {
+    void Start(){
         
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         if (selected != null){
             trajectory();
         }else{
@@ -35,8 +33,7 @@ public class BaseMovment : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, RotationSpeed * Time.deltaTime );
         GetComponent<Rigidbody>().AddForce(Vector3.Normalize(transform.forward) * Thrust * Time.deltaTime);
     }
-    void OnCollisionEnter (Collision col)
-    {
+    void OnCollisionEnter (Collision col){
         goalAchived();
     }
 
