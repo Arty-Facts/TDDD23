@@ -10,8 +10,6 @@ public class AsteroidMovment : BaseMovment
     {
         Thrust = 10000f;
         angularVelocity = Random.insideUnitSphere;
-
-        
     }
     override protected void trajectory(){
         Vector3 relativePos = selected.position -  transform.position ;

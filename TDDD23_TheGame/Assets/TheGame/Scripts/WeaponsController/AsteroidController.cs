@@ -6,11 +6,9 @@ public class AsteroidController : BaseController
 {
     public GameObject Target;  
     public List<GameObject> Astroids = new List<GameObject>();
+    public float SpawnEvery = 1f;
+    public bool Spawn = true;
 
-
-    private int capacity = 300;
-    private float force = 500;
-    private float speed = 3f;
     private int counter = 0;
     // Start is called before the first frame update
     void Start()
@@ -25,12 +23,12 @@ public class AsteroidController : BaseController
     }
 
     IEnumerator SpawnAstroids(){
-        while(true){
+        while(Spawn){
             GameObject astroid = Instantiate(Astroids[counter], SpawnPosition(), Quaternion.identity);
             astroid.GetComponent<AsteroidMovment>().Select(Target.transform);
             counter += 1;
             counter %= Astroids.Count;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(SpawnEvery);
         }
     }
 
