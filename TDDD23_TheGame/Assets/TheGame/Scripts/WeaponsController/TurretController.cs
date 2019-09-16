@@ -43,10 +43,11 @@ public class TurretController : BaseController
     private void target(){
         foreach(GameObject turret in Turrets)
         {
-            Vector3 relativePos = selected.position - turret.transform.position + selected.forward;
-            Quaternion toRotation = Quaternion.FromToRotation(turret.transform.forward, relativePos);
+            Vector3 relativePos = selected.position - turret.transform.position;
+            Quaternion toRotation = Quaternion.FromToRotation(turret.transform.position, relativePos);
+            var newRot = Quaternion.LookRotation(relativePos);
 
-            turret.transform.rotation = Quaternion.Lerp(turret.transform.rotation, toRotation, speed * Time.deltaTime);
+            turret.transform.rotation = Quaternion.Lerp(turret.transform.rotation, newRot, speed * Time.deltaTime);
             turret.transform.rotation = new Quaternion(0,turret.transform.rotation.y,0, 1);
 
             GameObject gun = turret.transform.Find("GunPos").gameObject;
