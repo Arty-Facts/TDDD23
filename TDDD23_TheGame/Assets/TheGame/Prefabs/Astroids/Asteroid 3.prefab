@@ -346,8 +346,8 @@ GameObject:
   - component: {fileID: 2461086838396842819}
   - component: {fileID: 2461086837920951486}
   - component: {fileID: 2461086837920951485}
-  - component: {fileID: 2461086837920951456}
   - component: {fileID: 2461086837920951487}
+  - component: {fileID: 6204469487169520899}
   m_Layer: 0
   m_Name: Asteroid 3
   m_TagString: Enemy
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a718c138b20419b499c3d92b17e6ff7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tumble: 0.25
+  tumble: 1
 --- !u!64 &2461086837920951486
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -426,18 +426,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.92
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2461086837920951456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2461086838407263185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcdb88fc072e72943a7b41b84ff8f789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2461086837920951487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,3 +438,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d87d489c55fc504987b709bbe1e4ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6204469487169520899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2461086838407263185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5eac01055ebc2443a2ac618890c879c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Thrust: 10000
+  RotationSpeed: 100

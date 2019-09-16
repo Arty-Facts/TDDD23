@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeekingMovment : MonoBehaviour
+public class BaseMovment : MonoBehaviour
 {
-    private Transform selected; 
+    protected Transform selected; 
     public float Thrust = 10000f;
     public float RotationSpeed = 100f;
     void Start()
@@ -16,7 +16,9 @@ public class SeekingMovment : MonoBehaviour
     void Update()
     {
         if (selected != null){
-            seak();
+            trajectory();
+        }else{
+            goalAchived();
         }
         
     }
@@ -26,7 +28,7 @@ public class SeekingMovment : MonoBehaviour
 
     }
 
-    private void seak(){
+    virtual protected void trajectory(){
         Vector3 relativePos = selected.transform.position -  transform.position ;
         Quaternion toRotation = Quaternion.LookRotation(relativePos, Vector3.up);
 
@@ -35,6 +37,10 @@ public class SeekingMovment : MonoBehaviour
     }
     void OnCollisionEnter (Collision col)
     {
+        goalAchived();
+    }
+
+    private void goalAchived(){
         Destroy(gameObject,0.1f);
     }
 }
