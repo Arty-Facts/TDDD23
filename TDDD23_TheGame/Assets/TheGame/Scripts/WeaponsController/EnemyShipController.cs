@@ -28,6 +28,6 @@ public class EnemyShipController : BaseController
         return new Vector3(Random.Range(-300.0f, 300.0f), Random.Range(0.0f, 100.0f), SpawnRange);
     }
     private Vector3 LookPosition(){
-        return new Vector3(Random.Range(-200.0f, 200.0f), Random.Range(-30.0f, 100.0f), 0);
+        return new Vector3(Random.Range(-500.0f, 500.0f), Random.Range(-30.0f, 200.0f), 0);
     }
 }
