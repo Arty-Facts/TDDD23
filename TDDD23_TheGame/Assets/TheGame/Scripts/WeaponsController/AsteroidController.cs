@@ -8,6 +8,7 @@ public class AsteroidController : BaseController
     public List<GameObject> Astroids = new List<GameObject>();
     public float SpawnEvery = 1f;
     public bool Spawn = true;
+    public float SpawnRange = 100f;
 
     private int counter = 0;
     // Start is called before the first frame update
@@ -33,7 +34,7 @@ public class AsteroidController : BaseController
     }
 
     private Vector3 SpawnPosition(){
-        return new Vector3(Random.Range(-300.0f, 300.0f), Random.Range(0.0f, 100.0f), 200);
+        return new Vector3(Random.Range(-50.0f, 50.0f), Random.Range(0.0f, 30.0f), SpawnRange);
     }
 
 }

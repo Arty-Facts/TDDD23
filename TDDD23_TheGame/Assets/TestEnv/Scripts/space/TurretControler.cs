@@ -38,7 +38,7 @@ public class TurretControler : MonoBehaviour
                 GameObject tip = gun.transform.Find("Tip").gameObject;
 
                 GameObject bullet = Instantiate(ammo, tip.transform.position, new Quaternion(0,0,0,1));
-                bullet.GetComponent<Bullet>().Select(selected);
+                //bullet.GetComponent<Bullet>().Select(selected);
                 counter += 1;
                 counter %= 3;
             }
