@@ -103,9 +103,11 @@ GameObject:
   - component: {fileID: 4324488605315522352}
   - component: {fileID: 4389204059762129720}
   - component: {fileID: 3456897649531412638}
+  - component: {fileID: 3662061789238795101}
+  - component: {fileID: 569707897686994415}
   m_Layer: 0
   m_Name: EnemyCruiser
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,9 +148,9 @@ MeshCollider:
   m_GameObject: {fileID: 4326662902416289594}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 895e3c1697337a9458cad89aac25225f, type: 3}
 --- !u!114 &3456897649531412638
@@ -164,6 +166,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammo: {fileID: 5110150466430560449, guid: fa6131f9bb4d9af4aba3a059a1978375, type: 3}
+--- !u!54 &3662061789238795101
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4326662902416289594}
+  serializedVersion: 2
+  m_Mass: 100
+  m_Drag: 10
+  m_AngularDrag: 0.5
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &569707897686994415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4326662902416289594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb7b060978adae47952f7e65e4ce740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Thrust: 10000
+  RotationSpeed: 100
+  controller: {fileID: 0}
+  explotion: {fileID: 0}
 --- !u!1001 &66535661611953153
 PrefabInstance:
   m_ObjectHideFlags: 0

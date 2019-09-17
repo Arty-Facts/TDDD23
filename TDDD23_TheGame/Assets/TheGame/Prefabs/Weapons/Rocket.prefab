@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2374940355838047754}
   m_Layer: 0
   m_Name: Rocket
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -233,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 649782412189984969, guid: 918567da135d62740aa14f8903f59a28,
         type: 3}
       propertyPath: startDelay.scalar
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 649782412189984969, guid: 918567da135d62740aa14f8903f59a28,
         type: 3}
@@ -279,6 +279,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.rotation3D
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649782412189984963, guid: 918567da135d62740aa14f8903f59a28,
+        type: 3}
+      propertyPath: startDelay.scalar
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 649782412164891737, guid: 918567da135d62740aa14f8903f59a28,
         type: 3}

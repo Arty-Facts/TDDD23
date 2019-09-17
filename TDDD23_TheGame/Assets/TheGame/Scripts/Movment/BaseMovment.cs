@@ -31,7 +31,10 @@ public class BaseMovment : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(Vector3.Normalize(transform.forward) * Thrust * Time.deltaTime);
     }
     void OnCollisionEnter (Collision col){
-        goalAchived();
+;
+        if (col.collider.tag != GetComponent<Collider>().tag){
+            goalAchived();
+        }
     }
 
     virtual protected void goalAchived(){

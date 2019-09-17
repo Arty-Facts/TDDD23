@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketMovment : BaseMovment
+public class ShipMovment : BaseMovment
 {
     private float force = 30000;
-    private float rotationSpeed = .5f;
+    private float rotationSpeed = .01f;
 
-    public RocketController controller;
+    public EnemyShipController controller;
     public GameObject explotion;
-    public void Init(RocketController c, Transform s){
+    public void Init(EnemyShipController c, Transform s){
         controller = c;
         selected = s;
     }
@@ -17,7 +17,7 @@ public class RocketMovment : BaseMovment
     override protected void trajectory(){
 
         Vector3 relativePos = selected.position -  transform.position ;
-        Quaternion toRotation = Quaternion.LookRotation(relativePos, transform.forward);
+        Quaternion toRotation = Quaternion.LookRotation(relativePos, Vector3.up);
 
         //float dist = Vector3.Distance(selected.position, transform.position);
         //float totDist = Vector3.Distance(selected.position, transform.position);
@@ -28,9 +28,7 @@ public class RocketMovment : BaseMovment
     }
 
     override protected void goalAchived(){
-        Instantiate(explotion, transform.position, Quaternion.identity);
-        controller.Hitt(gameObject);
-        base.goalAchived();
+        //Instantiate(explotion, transform.position, Quaternion.identity);
+        //base.goalAchived();
     }
-    
 }

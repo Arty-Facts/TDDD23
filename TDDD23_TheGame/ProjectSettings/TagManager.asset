@@ -8,6 +8,8 @@ TagManager:
   - WeaponsControler
   - Turrets
   - Gun
+  - Enemy
+  - Astroids
   layers:
   - Default
   - TransparentFX
