@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7155210925306150470}
   - component: {fileID: 4940291361019179372}
   - component: {fileID: 622473072401817752}
-  - component: {fileID: 5565734824512017589}
   - component: {fileID: 1053436966093411966}
+  - component: {fileID: 207858819586837410}
+  - component: {fileID: 2374940355838047754}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -44,13 +45,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5110150466430560449}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 2
+  m_Mass: 10
+  m_Drag: 5
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &622473072401817752
 MonoBehaviour:
@@ -62,18 +63,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d87d489c55fc504987b709bbe1e4ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5565734824512017589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5110150466430560449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcdb88fc072e72943a7b41b84ff8f789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!136 &1053436966093411966
@@ -90,6 +79,35 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.5}
+--- !u!114 &207858819586837410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110150466430560449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eab3d5ae6110bd448d91350ab8e2929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Thrust: 10000
+  RotationSpeed: 100
+  controller: {fileID: 0}
+  explotion: {fileID: 3208048959603571982, guid: 8a4f810d0eddcac489432cdd95cde235,
+    type: 3}
+--- !u!114 &2374940355838047754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110150466430560449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70012c7f1107bf6489efc920dc9eaf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2463127358591547492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -205,7 +223,7 @@ PrefabInstance:
     - target: {fileID: 649782412189984969, guid: 918567da135d62740aa14f8903f59a28,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 649782412189984969, guid: 918567da135d62740aa14f8903f59a28,
         type: 3}
@@ -237,11 +255,6 @@ PrefabInstance:
       propertyPath: autoRandomSeed
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 649782412164891737, guid: 918567da135d62740aa14f8903f59a28,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 649782412189984963, guid: 918567da135d62740aa14f8903f59a28,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -260,11 +273,16 @@ PrefabInstance:
     - target: {fileID: 649782412189984963, guid: 918567da135d62740aa14f8903f59a28,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 649782412189984963, guid: 918567da135d62740aa14f8903f59a28,
         type: 3}
       propertyPath: InitialModule.rotation3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649782412164891737, guid: 918567da135d62740aa14f8903f59a28,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

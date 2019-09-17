@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletMovment : BaseMovment
 {
-    private float force = 30000f;
+    private float force = 50000f;
     private float speed = 300f;
 
 

@@ -17,7 +17,7 @@ public class BaseController : MonoBehaviour
     {
         
     }
-    private void target(){
+    virtual protected void target(){
         throw new Exception("missing function target in chield object");
     }
     virtual public void Select(Transform other){

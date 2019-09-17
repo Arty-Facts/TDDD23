@@ -7,9 +7,6 @@ public class BaseMovment : MonoBehaviour
     protected Transform selected; 
     public float Thrust = 10000f;
     public float RotationSpeed = 100f;
-    void Start(){
-        
-    }
 
     // Update is called once per frame
     void Update(){

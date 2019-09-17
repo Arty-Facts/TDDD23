@@ -5,7 +5,7 @@ using UnityEngine;
 public class AsteroidMovment : BaseMovment
 {
     public GameObject explotion;
-    private float tumble = 0.5f;
+    private float tumble = 0.2f;
     private Vector3 angularVelocity;
     void Start()
     {
