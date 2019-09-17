@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AsteroidMovment : BaseMovment
 {
+    public GameObject explotion;
     private float tumble = 0.5f;
     private Vector3 angularVelocity;
     void Start()
@@ -16,6 +17,11 @@ public class AsteroidMovment : BaseMovment
         GetComponent<Rigidbody>().AddForce(Vector3.Normalize(relativePos) * Thrust * Time.deltaTime);
         GetComponent<Rigidbody>().angularVelocity = angularVelocity * tumble;
 
+    }
+    override protected void goalAchived(){
+        Instantiate(explotion, transform.position, Quaternion.identity);
+        base.goalAchived();
+        
     }
 
 }

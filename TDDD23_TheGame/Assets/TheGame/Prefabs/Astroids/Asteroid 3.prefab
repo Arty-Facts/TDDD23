@@ -451,3 +451,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Thrust: 10000
   RotationSpeed: 100
+  explotion: {fileID: 3755974363757328171, guid: dac10dbf90c5d044bb21886d235773fe,
+    type: 3}

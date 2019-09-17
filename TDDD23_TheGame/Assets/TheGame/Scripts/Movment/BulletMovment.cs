@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BulletMovment : BaseMovment
 {
-    private float force = 10000f;
-    private float speed = 100f;
+    private float force = 30000f;
+    private float speed = 300f;
 
 
     override protected void trajectory(){

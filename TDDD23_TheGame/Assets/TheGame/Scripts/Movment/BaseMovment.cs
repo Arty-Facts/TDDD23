@@ -37,7 +37,7 @@ public class BaseMovment : MonoBehaviour
         goalAchived();
     }
 
-    private void goalAchived(){
-        Destroy(gameObject,0.1f);
+    virtual protected void goalAchived(){
+        Destroy(gameObject);
     }
 }

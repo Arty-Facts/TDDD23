@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Tobii.Gaming;
 
 public class TurretController : BaseController
 {
     public GameObject Turret;
     public GameObject ammo;  
     private List<GameObject> Turrets = new List<GameObject>();
+    private Queue<Transform> SelectQue = new Queue<Transform>();
 
     private int capacity = 300;
     private float force = 500;
@@ -23,10 +25,13 @@ public class TurretController : BaseController
     // Update is called once per frame
     void Update()
     {
+        if (SelectQue.Count != 0 && selected == null){
+            selected = SelectQue.Dequeue();
+            print(SelectQue.Count);
+        }
         if (selected != null){
             target();
             if (Input.GetMouseButtonDown(0)){
-                int pos = Random.Range(0, Turrets.Count);
 
                 GameObject gun = Turrets[counter].transform.Find("GunPos").gameObject;
                 GameObject tip = gun.transform.Find("Tip").gameObject;
@@ -37,6 +42,7 @@ public class TurretController : BaseController
                 counter %= 3;
             }
         }
+
 
     }
 
@@ -52,9 +58,16 @@ public class TurretController : BaseController
 
             GameObject gun = turret.transform.Find("GunPos").gameObject;
 
-            gun.transform.rotation = Quaternion.Lerp(gun.transform.rotation, toRotation, speed * Time.deltaTime);
+            gun.transform.rotation = Quaternion.Lerp(gun.transform.rotation, newRot, speed * Time.deltaTime);
             gun.transform.rotation = new Quaternion(gun.transform.rotation.x, turret.transform.rotation.y, 0, 1);
 
+        }
+    }
+    override public void Select(Transform other){
+        if(!TobiiAPI.IsConnected){
+            SelectQue.Enqueue(other);
+		}else{
+            selected = other;
         }
     }
 

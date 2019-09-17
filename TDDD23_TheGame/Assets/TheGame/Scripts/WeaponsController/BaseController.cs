@@ -20,7 +20,7 @@ public class BaseController : MonoBehaviour
     private void target(){
         throw new Exception("missing function target in chield object");
     }
-    public void Select(Transform other){
+    virtual public void Select(Transform other){
         selected = other;
     }
     
