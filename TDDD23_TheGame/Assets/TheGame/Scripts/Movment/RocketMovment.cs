@@ -9,9 +9,8 @@ public class RocketMovment : BaseMovment
 
     public RocketController controller;
     public GameObject explotion;
-    public void Init(RocketController c, Transform s){
+    public void AddController(RocketController c){
         controller = c;
-        selected = s;
     }
 
     override protected void trajectory(){

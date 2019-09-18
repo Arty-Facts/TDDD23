@@ -7,7 +7,7 @@ public class EnemyShipController : BaseController
     // Start is called before the first frame update
     public GameObject Ship;
     public GameObject Target;  
-    public float SpawnEvery = 15f;
+    private float SpawnEvery = 1f;
     public bool Spawn = true;
     public float SpawnRange = 200f;
     void Start()
@@ -18,9 +18,10 @@ public class EnemyShipController : BaseController
     IEnumerator SpawnEnemyShips(){
         while(Spawn){
             GameObject ship = Instantiate(Ship, SpawnPosition(), Random.rotation);
-            ship.GetComponent<ShipMovment>().Init(this, Target.transform);
+            ship.GetComponent<ShipMovment>().Select(Target.transform);
             ship.transform.LookAt(LookPosition());
             yield return new WaitForSeconds(SpawnEvery);
+            SpawnEvery *= 2;
         }
     }
 

@@ -7,12 +7,9 @@ public class ShipMovment : BaseMovment
     private float force = 30000;
     private float rotationSpeed = .01f;
 
-    public EnemyShipController controller;
+
     public GameObject explotion;
-    public void Init(EnemyShipController c, Transform s){
-        controller = c;
-        selected = s;
-    }
+ 
 
     override protected void trajectory(){
 
@@ -28,7 +25,7 @@ public class ShipMovment : BaseMovment
     }
 
     override protected void goalAchived(){
-        //Instantiate(explotion, transform.position, Quaternion.identity);
-        //base.goalAchived();
+        Instantiate(explotion, transform.position, Quaternion.identity);
+        Destroy(gameObject, 1);
     }
 }

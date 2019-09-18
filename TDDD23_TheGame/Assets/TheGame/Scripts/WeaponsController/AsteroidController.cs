@@ -6,7 +6,7 @@ public class AsteroidController : BaseController
 {
     public GameObject Target;  
     public List<GameObject> Astroids = new List<GameObject>();
-    public float SpawnEvery = 10f;
+    private float SpawnEvery = 5f;
     public bool Spawn = true;
     public float SpawnRange = 100f;
 

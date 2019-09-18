@@ -7,14 +7,14 @@ using Tobii.Gaming;
 public class TurretSelectOnGaze : MonoBehaviour
 {
     private GazeAware _gazeAware;
-	private static TurretController weaponsControler;
+	private static TurretController weaponsController;
 	private bool wasSelected = false;
 	// Use this for initialization
 	void Start () {
 		_gazeAware = GetComponent<GazeAware>();
-		weaponsControler = GameObject.Find("Base").GetComponent<TurretController>();
+		weaponsController = GameObject.Find("Base").GetComponent<TurretController>();
 		if(!TobiiAPI.IsConnected){
-			weaponsControler.Select(transform);
+			weaponsController.Select(transform);
 		}
 	}
 	
@@ -22,20 +22,18 @@ public class TurretSelectOnGaze : MonoBehaviour
 	void Update () {
 		if (_gazeAware.HasGazeFocus)
         {
-            weaponsControler.Select(transform);
+            weaponsController.Select(transform);
 			wasSelected = true;
         }else{
 			if(wasSelected){
-            	//weaponsControler.ReleseSelected();
+            	//weaponsController.ReleseSelected();
 				wasSelected = false;
 			}
         }
 	}
 	void OnCollisionEnter (Collision col)
     {
-        if(col.gameObject.tag == "Ammo")
-        {
-            //weaponsControler.Hitt(col.gameObject);
-        }
+		if (col.collider.tag != GetComponent<Collider>().tag)
+        	weaponsController.Hitt(transform);
     }
 }
