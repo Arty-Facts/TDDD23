@@ -10,6 +10,7 @@ public class EnemyShipController : BaseController
     private float SpawnEvery = 1f;
     public bool Spawn = true;
     public float SpawnRange = 200f;
+    private float SpawnVarience = 100;
     void Start()
     {
         StartCoroutine(SpawnEnemyShips());
@@ -26,7 +27,7 @@ public class EnemyShipController : BaseController
     }
 
     private Vector3 SpawnPosition(){
-        return new Vector3(Random.Range(-300.0f, 300.0f), Random.Range(0.0f, 100.0f), SpawnRange);
+        return new Vector3(Random.Range(-300.0f, 300.0f), Random.Range(0.0f, 100.0f), Random.Range(SpawnRange-SpawnVarience,SpawnRange+SpawnVarience));
     }
     private Vector3 LookPosition(){
         return new Vector3(Random.Range(-500.0f, 500.0f), Random.Range(-30.0f, 200.0f), 0);

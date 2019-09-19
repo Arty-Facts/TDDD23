@@ -50,7 +50,6 @@ public class TurretController : BaseController
                 }
             }
             selected = chosen;
-            print(SelectList.Count);
         }
         if (selected != null){
             target();
@@ -97,6 +96,7 @@ public class TurretController : BaseController
 
     }
     override public void Select(Transform other){
+        print(TobiiAPI.IsConnected);
         if(!TobiiAPI.IsConnected){
             SelectList.Add(other);
 		}else{

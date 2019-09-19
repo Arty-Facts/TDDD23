@@ -37,6 +37,7 @@ public class RocketController : BaseController
             yield return new WaitForSeconds(SleepFore);
             if (ammos.Count == 0){
                     Spawn = true;
+                    SleepFore *= 2;
                 }
         }
     }

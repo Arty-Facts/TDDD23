@@ -14,7 +14,7 @@ public class BaseMovment : MonoBehaviour
         if (selected != null){
             trajectory();
         }else{
-            goalAchived();
+            goalMet();
         }
         
     }
@@ -40,5 +40,8 @@ public class BaseMovment : MonoBehaviour
 
     virtual protected void goalAchived(){
         Destroy(gameObject);
+    }
+    virtual protected void goalMet(){
+        Destroy(gameObject, 0.5f);
     }
 }
