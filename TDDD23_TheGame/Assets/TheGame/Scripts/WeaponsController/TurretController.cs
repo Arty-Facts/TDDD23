@@ -97,7 +97,7 @@ public class TurretController : BaseController
     }
     override public void Select(Transform other){
         print(TobiiAPI.IsConnected);
-        if(!TobiiAPI.IsConnected){
+        if(!TobiiAPI.IsConnected || true){
             SelectList.Add(other);
 		}else{
             selected = other;
