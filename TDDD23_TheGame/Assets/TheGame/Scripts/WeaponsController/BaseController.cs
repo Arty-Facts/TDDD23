@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BaseController : MonoBehaviour
 {
-    protected Transform selected;
+    protected GameObject selected;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +20,7 @@ public class BaseController : MonoBehaviour
     virtual protected void target(){
         throw new Exception("missing function target in chield object");
     }
-    virtual public void Select(Transform other){
+    virtual public void Select(GameObject other){
         selected = other;
     }
     

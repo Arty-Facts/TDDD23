@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 2461086837920951487}
   - component: {fileID: 31934194133230973}
   - component: {fileID: 6204469487169520899}
+  - component: {fileID: 1270520597069891692}
   m_Layer: 0
   m_Name: Asteroid 3
   m_TagString: Astroids
@@ -438,7 +439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70012c7f1107bf6489efc920dc9eaf22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textFile: {fileID: 4900000, guid: e8862b6046428d84993e87b96e6ac034, type: 3}
 --- !u!114 &6204469487169520899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +455,19 @@ MonoBehaviour:
   RotationSpeed: 100
   explotion: {fileID: 3755974363757328171, guid: dac10dbf90c5d044bb21886d235773fe,
     type: 3}
+--- !u!114 &1270520597069891692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2461086838407263185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5abec201ece4a544a974cafe367a856a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textFile: {fileID: 4900000, guid: e8862b6046428d84993e87b96e6ac034, type: 3}
 --- !u!1001 &8923895085448705578
 PrefabInstance:
   m_ObjectHideFlags: 0

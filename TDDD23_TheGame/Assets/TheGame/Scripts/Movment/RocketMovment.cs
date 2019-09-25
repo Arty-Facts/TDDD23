@@ -27,9 +27,11 @@ public class RocketMovment : BaseMovment
     }
 
     override protected void goalAchived(){
-        Instantiate(explotion, transform.position, Quaternion.identity);
-        controller.Hitt(gameObject);
-        base.goalAchived();
+        if(gameObject.GetComponent<Gameplay>().GetText() == ""){
+            Instantiate(explotion, transform.position, Quaternion.identity);
+            controller.Hitt(gameObject);
+            base.goalAchived();
+        }
     }
     
 }

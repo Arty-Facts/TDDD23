@@ -10,7 +10,7 @@ public class TurretController : BaseController
     public GameObject ammo;  
     public GameObject Higlighter; 
     private List<GameObject> Turrets = new List<GameObject>();
-    private List<Transform> SelectList = new List<Transform>();
+    private List<GameObject> SelectList = new List<GameObject>();
 
     private int capacity = 300;
     private float force = 500;
@@ -38,12 +38,12 @@ public class TurretController : BaseController
     void Update()
     {
         if (SelectList.Count != 0 && selected == null){
-            Transform chosen = SelectList[0];
-            float min_dist = Vector3.Distance(Charector.transform.position, chosen.position);
-            foreach(Transform candidate in SelectList){
+            GameObject chosen = SelectList[0];
+            float min_dist = Vector3.Distance(Charector.transform.position, chosen.transform.position);
+            foreach(GameObject candidate in SelectList){
                 if (candidate == null)
                     continue;
-                float dist = Vector3.Distance(Charector.transform.position, candidate.position);
+                float dist = Vector3.Distance(Charector.transform.position, candidate.transform.position);
                 if (dist < min_dist){
                     min_dist = dist;
                     chosen = candidate;
@@ -57,6 +57,10 @@ public class TurretController : BaseController
                 StartCoroutine(StartShooting());
                 shoot();
             }
+            if (selected.GetComponent<Gameplay>().GetText().Length < 1){
+                SelectList.Remove(selected);
+                selected = null;
+            }
         }
 
 
@@ -67,17 +71,18 @@ public class TurretController : BaseController
             GameObject tip = gun.transform.Find("Tip").gameObject;
 
             GameObject bullet = Instantiate(ammo, tip.transform.position, new Quaternion(0,0,0,1));
-            bullet.GetComponent<BulletMovment>().Select(selected);
+            bullet.GetComponent<BulletMovment>().Select(selected.transform);
             counter += 1;
             counter %= Turrets.Count;
-            SelectList.Remove(selected);
+            selected.GetComponent<Gameplay>().UpdateText();
+            //SelectList.Remove(selected);
         }
     }
 
     private void target(){
         foreach(GameObject turret in Turrets)
         {
-            Vector3 relativePos = selected.position - turret.transform.position;
+            Vector3 relativePos = selected.transform.position - turret.transform.position;
             Quaternion toRotation = Quaternion.FromToRotation(turret.transform.position, relativePos);
             var newRot = Quaternion.LookRotation(relativePos);
 
@@ -90,21 +95,25 @@ public class TurretController : BaseController
             gun.transform.rotation = new Quaternion(gun.transform.rotation.x, turret.transform.rotation.y, 0, 1);
 
         }
-        Vector3 dir = selected.position - Charector.transform.position;
+        Vector3 dir = selected.transform.position - Charector.transform.position;
         Higlighter.transform.position = Vector3.Lerp(Higlighter.transform.position, Charector.transform.position + 5f* Vector3.Normalize(dir),  speed * Time.deltaTime);
-        Higlighter.transform.LookAt(Charector.transform.position);
+        Vector3 lookPos = Higlighter.transform.position - Charector.transform.position;
+        Higlighter.transform.LookAt(Charector.transform.position + 10 * Vector3.Normalize(lookPos));
+        Higlighter.GetComponent<TextMesh>().text = selected.GetComponent<Gameplay>().GetText();
 
     }
-    override public void Select(Transform other){
-        print(TobiiAPI.IsConnected);
+    override public void Select(GameObject other){
+
         if(!TobiiAPI.IsConnected || true){
             SelectList.Add(other);
 		}else{
             selected = other;
         }
     }
-    public void Hitt(Transform obj){
-        SelectList.Remove(obj);
+    public void Hitt(GameObject obj){
+        if (obj.GetComponent<Gameplay>().GetText() == ""){
+            //SelectList.Remove(obj);
+        }
     }
 
 }

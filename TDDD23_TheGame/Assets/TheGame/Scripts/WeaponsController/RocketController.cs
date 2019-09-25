@@ -14,7 +14,7 @@ public class RocketController : BaseController
 
     void Start()
     {
-        selected = GameObject.Find("Main Camera").GetComponent<Transform>();
+        selected = GameObject.Find("Main Camera");
         StartCoroutine(SpawnRockets());
     }
     
@@ -26,7 +26,7 @@ public class RocketController : BaseController
                     GameObject rocket = Instantiate(ammo, transform.position,  Random.rotation);
                     Physics.IgnoreCollision(rocket.GetComponent<Collider>(), GetComponent<Collider>());
                     RocketMovment rocketMovment = rocket.GetComponent<RocketMovment>();
-                    rocketMovment.Select(selected);
+                    rocketMovment.Select(selected.transform);
                     rocketMovment.AddController(this);
                     ammos.Add(rocket);
                 }
