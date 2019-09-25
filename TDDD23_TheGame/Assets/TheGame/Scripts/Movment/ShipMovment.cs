@@ -26,7 +26,7 @@ public class ShipMovment : BaseMovment
 
     override protected void goalAchived(){
         Instantiate(explotion, transform.position, Quaternion.identity);
-        Destroy(gameObject, 1);
+        Destroy(gameObject, 1.5f);
         
     }
 }

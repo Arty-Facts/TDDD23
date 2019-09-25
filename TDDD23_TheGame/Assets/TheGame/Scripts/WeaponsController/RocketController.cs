@@ -7,7 +7,7 @@ public class RocketController : BaseController
     public bool Spawn = true;
     public GameObject ammo;
     private List<GameObject> ammos = new List<GameObject>();
-    private int capacity = 3;
+    private int capacity = 10;
     private float SpawnEvery = .3f;
     private float SleepFore = 3f;
     

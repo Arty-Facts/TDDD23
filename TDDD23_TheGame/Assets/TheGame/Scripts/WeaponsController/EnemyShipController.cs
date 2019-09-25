@@ -7,7 +7,7 @@ public class EnemyShipController : BaseController
     // Start is called before the first frame update
     public GameObject Ship;
     public GameObject Target;  
-    private float SpawnEvery = 3f;
+    private float SpawnEvery = 0.5f;
     public bool Spawn = true;
     public float SpawnRange = 200f;
     private float SpawnVarience = 100;

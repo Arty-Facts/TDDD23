@@ -29,11 +29,11 @@ public class TurretController : BaseController
 
     IEnumerator StartShooting(){
         while(true){
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.05f);
             shoot();
-            if (selected.GetComponent<Gameplay>().GetText().Length < 1){
-                break;
-            }
+            // if (selected.GetComponent<Gameplay>().GetText().Length < 1){
+            //     break;
+            // }
         }
     }
 
