@@ -5,8 +5,10 @@ using UnityEngine;
 public class BaseMovment : MonoBehaviour
 {
     protected Transform selected; 
+    protected int HP = 1;
     public float Thrust = 10000f;
     public float RotationSpeed = 100f;
+    private bool kill = true;
     
 
     // Update is called once per frame
@@ -17,6 +19,9 @@ public class BaseMovment : MonoBehaviour
             goalMet();
         }
         
+    }
+    public void SetHP(int hp){
+        HP = hp;
     }
 
     public void Select(Transform target){
@@ -32,8 +37,14 @@ public class BaseMovment : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(Vector3.Normalize(transform.forward) * Thrust * Time.deltaTime);
     }
     void OnCollisionEnter (Collision col){
-;
         if (col.collider.tag != GetComponent<Collider>().tag){
+            HP -= 1;
+            if(HP < 1){
+                goalAchived();
+            }
+        }
+        print(col.collider.tag);
+        if (col.collider.tag == "MainCamera"){
             goalAchived();
         }
     }
@@ -43,5 +54,16 @@ public class BaseMovment : MonoBehaviour
     }
     virtual protected void goalMet(){
         Destroy(gameObject, 0.5f);
+    }
+    public void Kill(){
+        if(kill){
+            StartCoroutine(StartDegridation());
+        }
+        kill = false;
+    }
+
+    IEnumerator StartDegridation(){
+        yield return new WaitForSeconds(.5f);
+        goalAchived();
     }
 }

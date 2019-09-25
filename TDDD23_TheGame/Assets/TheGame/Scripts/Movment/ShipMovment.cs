@@ -25,9 +25,8 @@ public class ShipMovment : BaseMovment
     }
 
     override protected void goalAchived(){
-        if(gameObject.GetComponent<Gameplay>().GetText() == ""){
-            Instantiate(explotion, transform.position, Quaternion.identity);
-            Destroy(gameObject, 1);
-        }
+        Instantiate(explotion, transform.position, Quaternion.identity);
+        Destroy(gameObject, 1);
+        
     }
 }

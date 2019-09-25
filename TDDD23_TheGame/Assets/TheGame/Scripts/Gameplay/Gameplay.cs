@@ -12,7 +12,8 @@ public class Gameplay : MonoBehaviour
     {
         //text = textFile.text;  //this is the content as string
         string[] stringList = textFile.text.Split('\n');
-        text = stringList[Mathf.RoundToInt(Random.Range(0, stringList.Length))];
+        text = stringList[Mathf.RoundToInt(Random.Range(0, stringList.Length))].Trim();
+        gameObject.GetComponent<BaseMovment>().SetHP(text.Length);
         //Print the text from the file
     }
 

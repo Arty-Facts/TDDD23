@@ -19,9 +19,9 @@ public class TurretController : BaseController
     // Start is called before the first frame update
     void Start()
     {
-        Turrets.Add(Instantiate(Turret,  new Vector3(0.8f, 0.35f, 1.7f), Quaternion.identity));
-        Turrets.Add(Instantiate(Turret,  new Vector3(0f, 0.25f, 4.1f), Quaternion.identity));
-        Turrets.Add(Instantiate(Turret,  new Vector3(-0.8f, 0.35f, 1.7f), Quaternion.identity));
+        Turrets.Add(Instantiate(Turret,  new Vector3(0.82f, 0.07f, 1.7f), Quaternion.identity));
+        Turrets.Add(Instantiate(Turret,  new Vector3(0f, -0.08f, 4.1f), Quaternion.identity));
+        Turrets.Add(Instantiate(Turret,  new Vector3(-0.82f, 0.07f, 1.7f), Quaternion.identity));
         Higlighter = Instantiate(Higlighter,  new Vector3(0f, 0f, -10f), Quaternion.identity);
         
         
@@ -31,12 +31,17 @@ public class TurretController : BaseController
         while(true){
             yield return new WaitForSeconds(0.2f);
             shoot();
+            if (selected.GetComponent<Gameplay>().GetText().Length < 1){
+                break;
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        string input = "";
+
         if (SelectList.Count != 0 && selected == null){
             GameObject chosen = SelectList[0];
             float min_dist = Vector3.Distance(Charector.transform.position, chosen.transform.position);
@@ -57,13 +62,26 @@ public class TurretController : BaseController
                 StartCoroutine(StartShooting());
                 shoot();
             }
+            input = Input.inputString;
+            if (input != "" && validate(input)){
+                shoot();
+            }
+            
             if (selected.GetComponent<Gameplay>().GetText().Length < 1){
                 SelectList.Remove(selected);
+                selected.GetComponent<BaseMovment>().Kill();
+                Higlighter.GetComponent<TextMesh>().text = "";
                 selected = null;
             }
         }
 
 
+    }
+    private bool validate(string input){
+        if (input[0] != selected.GetComponent<Gameplay>().GetText()[0]){
+            return false; 
+        }
+        return true;
     }
     private void shoot(){
         if (selected != null){
@@ -104,14 +122,14 @@ public class TurretController : BaseController
     }
     override public void Select(GameObject other){
 
-        if(!TobiiAPI.IsConnected || true){
+        if(!TobiiAPI.IsConnected){
             SelectList.Add(other);
 		}else{
             selected = other;
         }
     }
     public void Hitt(GameObject obj){
-        if (obj.GetComponent<Gameplay>().GetText() == ""){
+        if (obj.GetComponent<Gameplay>().GetText().Length < 1){
             //SelectList.Remove(obj);
         }
     }

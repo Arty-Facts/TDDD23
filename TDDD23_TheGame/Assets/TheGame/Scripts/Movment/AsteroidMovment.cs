@@ -19,11 +19,8 @@ public class AsteroidMovment : BaseMovment
 
     }
     override protected void goalAchived(){
-        if(gameObject.GetComponent<Gameplay>().GetText() == ""){
-            Instantiate(explotion, transform.position, Quaternion.identity);
-            base.goalAchived();
-        }
-        
+        Instantiate(explotion, transform.position, Quaternion.identity);
+        base.goalAchived();
     }
 
 }
