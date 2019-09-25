@@ -43,7 +43,6 @@ public class BaseMovment : MonoBehaviour
                 goalAchived();
             }
         }
-        print(col.collider.tag);
         if (col.collider.tag == "MainCamera"){
             goalAchived();
         }
