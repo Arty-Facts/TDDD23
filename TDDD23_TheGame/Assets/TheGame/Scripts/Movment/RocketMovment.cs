@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RocketMovment : BaseMovment
 {
-    private float force = 30000;
+    private float force = 20000;
     private float rotationSpeed = 10f;
 
     public RocketController controller;

@@ -5,6 +5,8 @@ using Tobii.Gaming;
 
 public class TurretController : BaseController
 {
+    public GameManager gameManager;
+
     public GameObject Turret;
     public GameObject Charector;
     public GameObject ammo;  
@@ -16,6 +18,8 @@ public class TurretController : BaseController
     private float force = 500;
     private float speed = 6f;
     private int counter = 0;
+
+    private bool endGame = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,7 +67,7 @@ public class TurretController : BaseController
                 shoot();
             }
             input = Input.inputString;
-            if (input != "" && validate(input)){
+            if (input != "" || validate(input)){
                 shoot();
             }
             
@@ -129,8 +133,12 @@ public class TurretController : BaseController
         }
     }
     public void Hitt(GameObject obj){
-        if (obj.GetComponent<Gameplay>().GetText().Length < 1){
-            //SelectList.Remove(obj);
+
+    }
+    void OnCollisionEnter (Collision col){
+        if (endGame){
+            gameManager.SwitchState();
+            endGame = false;
         }
     }
 

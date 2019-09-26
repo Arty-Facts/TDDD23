@@ -43,8 +43,11 @@ public class BaseMovment : MonoBehaviour
                 goalAchived();
             }
         }
-        if (col.collider.tag == "MainCamera"){
+        if (col.collider.tag == "Base"){
             goalAchived();
+        }
+        if (col.collider.tag == "Shield"){
+            Destroy(gameObject);
         }
     }
 

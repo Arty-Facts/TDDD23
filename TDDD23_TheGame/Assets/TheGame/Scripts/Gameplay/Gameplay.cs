@@ -7,13 +7,16 @@ public class Gameplay : MonoBehaviour
     // Start is called before the first frame update
     
 	public TextAsset textFile; 
-	private string text;
+	private string text = null;
     void Start()
     {
         //text = textFile.text;  //this is the content as string
-        string[] stringList = textFile.text.Split('\n');
-        text = stringList[Mathf.RoundToInt(Random.Range(0, stringList.Length))].Trim();
-        gameObject.GetComponent<BaseMovment>().SetHP(text.Length);
+        if (text == null){
+            string[] stringList = textFile.text.Split('\n');
+            text = stringList[Mathf.RoundToInt(Random.Range(0, stringList.Length))].Trim();
+            gameObject.GetComponent<BaseMovment>().SetHP(text.Length);
+
+        }
         //Print the text from the file
     }
 
@@ -21,6 +24,10 @@ public class Gameplay : MonoBehaviour
     void Update()
     {
         
+    }
+    public void SetText(string newText){
+        text = newText;
+        gameObject.GetComponent<BaseMovment>().SetHP(newText.Length);
     }
 
     public string GetText(){

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AsteroidController : BaseController
 {
+    public GameManager gameManager;
     public GameObject Target;  
     public List<GameObject> Astroids = new List<GameObject>();
     private float SpawnEvery = 2f;
@@ -34,7 +35,7 @@ public class AsteroidController : BaseController
     }
 
     private Vector3 SpawnPosition(){
-        return new Vector3(Random.Range(-40.0f, 40.0f), Random.Range(0.0f, 30.0f), SpawnRange);
+        return new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(0.0f, 30.0f), SpawnRange);
     }
 
 }

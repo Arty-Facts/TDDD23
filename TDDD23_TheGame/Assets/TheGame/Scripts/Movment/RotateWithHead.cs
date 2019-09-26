@@ -6,7 +6,7 @@ using Tobii.Gaming;
 public class RotateWithHead : MonoBehaviour
 {
 	// Use this for initialization
-	private float speed = 0.002f;
+	private float speed = 0.001f;
 	void Start () {
 		
 	}

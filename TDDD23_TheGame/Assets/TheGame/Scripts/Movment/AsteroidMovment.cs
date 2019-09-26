@@ -13,14 +13,19 @@ public class AsteroidMovment : BaseMovment
         angularVelocity = Random.insideUnitSphere;
     }
     override protected void trajectory(){
-        Vector3 relativePos = selected.position -  transform.position ;
-        GetComponent<Rigidbody>().AddForce(Vector3.Normalize(relativePos) * Thrust * Time.deltaTime);
+        if (selected != null){
+            Vector3 relativePos = selected.position -  transform.position ;
+            GetComponent<Rigidbody>().AddForce(Vector3.Normalize(relativePos) * Thrust * Time.deltaTime);
+        }
         GetComponent<Rigidbody>().angularVelocity = angularVelocity * tumble;
 
     }
     override protected void goalAchived(){
         Instantiate(explotion, transform.position, Quaternion.identity);
         base.goalAchived();
+    }
+    override protected void goalMet(){
+        GetComponent<Rigidbody>().angularVelocity = angularVelocity * tumble;
     }
 
 }
