@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour
 
     private void GotoStart(){
         Menu.SetActive(false);
-        StartController.SetActive(true);
         MainCamara.SetActive(true);
+        StartController.SetActive(true);
     }
 
     public void GoToBenchmark(){
@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
         }
     }
     private void setUpMenu(){
+        EndScreen.SetActive(false);
         MiniMap.SetActive(false);
         MainCamara.SetActive(false);
         Menu.SetActive(true);
