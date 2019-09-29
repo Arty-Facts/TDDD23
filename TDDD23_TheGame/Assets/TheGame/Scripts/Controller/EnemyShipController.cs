@@ -9,25 +9,23 @@ public class EnemyShipController : BaseController
 
     public GameObject Ship;
     public GameObject Target;  
-    private float SpawnEvery = 1f;
+    private float SpawnEvery = 3f;
     public bool Spawn = true;
-    public float SpawnRange = 300f;
+    private float SpawnRange = 300f;
     private float SpawnVarience = 100;
     void Start()
     {
-        SetUp();
+        //SetUp();
     }
     override public void SetUp(){
+        SpawnEvery =  3f;
         StartCoroutine(SpawnEnemyShips());
     }
 
     IEnumerator SpawnEnemyShips(){
         while(Spawn){
-            GameObject ship = Instantiate(Ship, SpawnPosition(), Random.rotation);
-            ship.transform.parent = transform;
-            ship.GetComponent<ShipMovment>().Select(Target.transform);
-            ship.transform.LookAt(LookPosition());
             yield return new WaitForSeconds(SpawnEvery);
+            SpawnOne();
             SpawnEvery *= 2;
         }
     }
@@ -37,5 +35,12 @@ public class EnemyShipController : BaseController
     }
     private Vector3 LookPosition(){
         return new Vector3(Random.Range(-500.0f, 500.0f), Random.Range(-30.0f, 200.0f), 0);
+    }
+
+    private void SpawnOne(){
+        GameObject ship = Instantiate(Ship, SpawnPosition(), Random.rotation);
+        ship.transform.parent = transform;
+        ship.GetComponent<ShipMovment>().Select(Target.transform);
+        ship.transform.LookAt(LookPosition());
     }
 }

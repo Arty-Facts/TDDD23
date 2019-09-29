@@ -12,13 +12,13 @@ public class AsteroidController : BaseController
     private float SpawnRange = 400f;
     private float MinRange = 50f;
 
-    private int StartCount = 50;
+    private int StartCount = 30;
 
     private int counter = 0;
     // Start is called before the first frame update
     void Start()
     {
-        SetUp();
+        //SetUp();
     }
 
     override public void SetUp(){
@@ -44,7 +44,7 @@ public class AsteroidController : BaseController
     }
 
     private Vector3 SpawnPosition(){
-        return new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(0.0f, 30.0f), SpawnRange);
+        return new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(-10.0f, 30.0f), SpawnRange);
     }
     private void spawnOne(){
             GameObject astroid = Instantiate(Astroids[counter], SpawnPosition(), Quaternion.identity);

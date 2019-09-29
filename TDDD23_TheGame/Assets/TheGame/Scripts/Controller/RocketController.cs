@@ -15,10 +15,12 @@ public class RocketController : BaseController
     void Start()
     {
         selected = GameObject.Find("Main Camera");
-        SetUp();
+        //SetUp();
     }
     override public void SetUp(){
         StartCoroutine(SpawnRockets());
+        SleepFore = 3f;
+        SpawnEvery = .3f;
     }
     
     IEnumerator SpawnRockets(){
