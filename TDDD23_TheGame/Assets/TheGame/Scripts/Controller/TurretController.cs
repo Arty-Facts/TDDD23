@@ -63,11 +63,11 @@ public class TurretController : BaseController
         if (selected != null){
             target();
             if (Input.GetMouseButtonDown(0)){
-                StartCoroutine(StartShooting());
-                shoot();
+                //StartCoroutine(StartShooting());
+                //shoot();
             }
             input = Input.inputString;
-            if (input != "" || validate(input)){
+            if (input != "" && validate(input)){
                 shoot();
             }
             

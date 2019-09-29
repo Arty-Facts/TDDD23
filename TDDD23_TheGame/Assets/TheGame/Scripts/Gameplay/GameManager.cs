@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Signal());
     }
     IEnumerator Signal(){
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         stateChange();
 
     }

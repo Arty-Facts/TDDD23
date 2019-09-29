@@ -15,12 +15,16 @@ public class EnemyShipController : BaseController
     private float SpawnVarience = 100;
     void Start()
     {
+        SetUp();
+    }
+    override public void SetUp(){
         StartCoroutine(SpawnEnemyShips());
     }
 
     IEnumerator SpawnEnemyShips(){
         while(Spawn){
             GameObject ship = Instantiate(Ship, SpawnPosition(), Random.rotation);
+            ship.transform.parent = transform;
             ship.GetComponent<ShipMovment>().Select(Target.transform);
             ship.transform.LookAt(LookPosition());
             yield return new WaitForSeconds(SpawnEvery);

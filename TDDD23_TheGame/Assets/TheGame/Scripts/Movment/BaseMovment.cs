@@ -28,6 +28,15 @@ public class BaseMovment : MonoBehaviour
         selected = target;
 
     }
+    void OnDisable()
+    {
+        Teardown();
+    }
+
+    private void Teardown(){
+        Destroy(gameObject);
+    }
+
 
     virtual protected void trajectory(){
         Vector3 relativePos = selected.transform.position -  transform.position ;

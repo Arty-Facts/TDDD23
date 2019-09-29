@@ -11,6 +11,14 @@ public class BaseController : MonoBehaviour
     {
         
     }
+    void OnEnable()
+    {
+        SetUp();
+    }
+
+    virtual public void SetUp(){
+        throw new Exception("missing function Setup in chield object");
+    }
 
     // Update is called once per frame
     void Update()
@@ -27,4 +35,5 @@ public class BaseController : MonoBehaviour
     public void ReleseSelected(){
         selected = null;
     }
+    
 }
