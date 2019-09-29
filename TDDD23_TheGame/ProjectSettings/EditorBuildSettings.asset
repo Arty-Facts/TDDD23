@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/TheGame/Scenes/InSpaceGame.unity
+    guid: d7e381c38f1dc42408874ec99305ec69
   m_configObjects: {}

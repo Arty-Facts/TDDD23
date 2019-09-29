@@ -14,7 +14,7 @@ public class TurretSelectOnGaze : MonoBehaviour
 
 		_gazeAware = GetComponent<GazeAware>();
 		weaponsController = GameObject.Find("Base").GetComponent<TurretController>();
-		if(!TobiiAPI.IsConnected){
+		if(!weaponsController.Controlle){
 			weaponsController.Select(gameObject);
 		}
 	}

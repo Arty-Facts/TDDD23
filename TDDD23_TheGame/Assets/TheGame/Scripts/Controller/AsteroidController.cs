@@ -7,15 +7,17 @@ public class AsteroidController : BaseController
     public GameManager gameManager;
     public GameObject Target;  
     public List<GameObject> Astroids = new List<GameObject>();
-    private float SpawnEvery = 2f;
+    private float SpawnEvery = 3f;
     public bool Spawn = true;
     private float SpawnRange = 400f;
     private float MinRange = 50f;
 
-    private int StartCount = 30;
+    private int StartCount = 20;
 
     private int counter = 0;
     // Start is called before the first frame update
+
+
     void Start()
     {
         //SetUp();
@@ -28,12 +30,6 @@ public class AsteroidController : BaseController
             SpawnRange = i;
             spawnOne();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     IEnumerator SpawnAstroids(){

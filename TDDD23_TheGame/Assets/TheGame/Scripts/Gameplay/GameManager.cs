@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject EnemyController;
 
     public GameObject StartController; 
+    public GameObject TurretController; 
 
     public GameObject Menu;
     public GameObject MainCamara;
@@ -21,11 +22,6 @@ public class GameManager : MonoBehaviour
         State = newState;
     }
 
-    private void GotoStart(){
-        Menu.SetActive(false);
-        MainCamara.SetActive(true);
-        StartController.SetActive(true);
-    }
 
     public void GoToBenchmark(){
         GotoStart();
@@ -75,6 +71,17 @@ public class GameManager : MonoBehaviour
         MiniMap.SetActive(false);
         MainCamara.SetActive(false);
         Menu.SetActive(true);
+        AstriodController.SetActive(true);
+        EnemyController.SetActive(true);
+        TurretController.GetComponent<TurretController>().AutoShoot();
+    }
+    private void GotoStart(){
+        Menu.SetActive(false);
+        MainCamara.SetActive(true);
+        StartController.SetActive(true);
+        AstriodController.SetActive(false);
+        EnemyController.SetActive(false);
+        TurretController.GetComponent<TurretController>().EnableControlls();
     }
     private void setUpGame(){
         StartController.SetActive(false);
@@ -91,7 +98,6 @@ public class GameManager : MonoBehaviour
         Menu.SetActive(false);
         MainCamara.SetActive(true);
         AstriodController.SetActive(true);
-        EnemyController.SetActive(true);
         State = 3;
     }
     private void setUpEndScreen(){

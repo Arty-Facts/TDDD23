@@ -8,19 +8,20 @@ public class RocketController : BaseController
     public GameObject ammo;
     private List<GameObject> ammos = new List<GameObject>();
     private int capacity = 3;
-    private float SpawnEvery = .3f;
-    private float SleepFore = 3f;
+    private float SpawnEvery;
+    private float SleepFore;
     
 
     void Start()
     {
-        selected = GameObject.Find("Main Camera");
+        selected = GameObject.Find("Target");
         //SetUp();
     }
     override public void SetUp(){
         StartCoroutine(SpawnRockets());
-        SleepFore = 3f;
-        SpawnEvery = .3f;
+        SleepFore = 5f;
+        SpawnEvery = .5f;
+        capacity = 3;
     }
     
     IEnumerator SpawnRockets(){
@@ -44,6 +45,8 @@ public class RocketController : BaseController
             if (ammos.Count == 0){
                     Spawn = true;
                     SleepFore *= 2;
+                    capacity *= 2;
+
                 }
         }
     }

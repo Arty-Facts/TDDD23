@@ -9,7 +9,7 @@ public class EnemyShipController : BaseController
 
     public GameObject Ship;
     public GameObject Target;  
-    private float SpawnEvery = 3f;
+    private float SpawnEvery = 1f;
     public bool Spawn = true;
     private float SpawnRange = 300f;
     private float SpawnVarience = 100;

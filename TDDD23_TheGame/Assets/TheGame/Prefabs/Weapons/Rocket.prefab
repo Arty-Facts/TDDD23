@@ -78,8 +78,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.1
-  m_Height: 1.47
+  m_Radius: 0.38
+  m_Height: 1.43
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.6}
 --- !u!114 &207858819586837410
@@ -152,7 +152,7 @@ PrefabInstance:
     - target: {fileID: 5271322660530961346, guid: f29441cd4a5ecee488269ccdb3d57dec,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5271322660530961350, guid: f29441cd4a5ecee488269ccdb3d57dec,
         type: 3}
