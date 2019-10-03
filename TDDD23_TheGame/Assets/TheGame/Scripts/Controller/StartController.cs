@@ -7,6 +7,7 @@ public class StartController : MonoBehaviour
     public GameObject Asteroid;
     private GameObject asteroid;
     public GameManager gameManager;
+    public TurretController weaponsController;
     private Gameplay gameplay;
     private bool StartGame = true;
     // Start is called before the first frame update
@@ -36,6 +37,7 @@ public class StartController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //weaponsController.Select(asteroid);
         if (gameplay != null && gameplay.GetText().Length == 0 && StartGame){
             gameManager.SwitchState();
             StartGame = false;

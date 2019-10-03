@@ -5,11 +5,12 @@ using UnityEngine;
 public class Gameplay : MonoBehaviour
 {
     // Start is called before the first frame update
-    
+    private static GameManager gameManager;
 	public TextAsset textFile; 
 	private string text = null;
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         //text = textFile.text;  //this is the content as string
         if (text == null){
             string[] stringList = textFile.text.Split('\n');
@@ -37,6 +38,8 @@ public class Gameplay : MonoBehaviour
     public void UpdateText(){
         if (text.Length > 0){
             text = text.Substring(1);
+        }else{
+            gameManager.AddPoint();
         }
     }
 }

@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abec201ece4a544a974cafe367a856a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textFile: {fileID: 4900000, guid: e8862b6046428d84993e87b96e6ac034, type: 3}
+  textFile: {fileID: 4900000, guid: b79ccd88e3be3f44da5513fd7d861497, type: 3}
 --- !u!135 &2945902467546378261
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -152,7 +152,7 @@ PrefabInstance:
     - target: {fileID: 5271322660530961346, guid: f29441cd4a5ecee488269ccdb3d57dec,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5271322660530961350, guid: f29441cd4a5ecee488269ccdb3d57dec,
         type: 3}

@@ -73,6 +73,7 @@ public class BaseMovment : MonoBehaviour
         kill = false;
     }
 
+
     IEnumerator StartDegridation(){
         yield return new WaitForSeconds(1f);
         goalAchived();

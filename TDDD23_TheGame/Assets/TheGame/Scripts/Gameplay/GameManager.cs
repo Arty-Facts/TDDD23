@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,11 +17,18 @@ public class GameManager : MonoBehaviour
     public GameObject MiniMap;
     public GameObject EndScreen;
 
+    public int wordsTyped;
+    public float time;
+
+    public float WPM;
+
     private int State = 0;
     public void SetState(int newState){
         State = newState;
     }
-
+    public void AddPoint(){
+        wordsTyped += 1;
+    }
 
     public void GoToBenchmark(){
         GotoStart();
@@ -30,6 +37,10 @@ public class GameManager : MonoBehaviour
     public void GoToGame(){
         GotoStart();
         State = 2;
+    }
+
+    public void Exit(){
+        Application.Quit();
     }
 
     void Start()
@@ -84,6 +95,8 @@ public class GameManager : MonoBehaviour
         TurretController.GetComponent<TurretController>().EnableControlls();
     }
     private void setUpGame(){
+        wordsTyped = 0;
+        time = Time.time; 
         StartController.SetActive(false);
         MiniMap.SetActive(true);
         Menu.SetActive(false);
@@ -93,6 +106,8 @@ public class GameManager : MonoBehaviour
         State = 3;
     }
     private void setUpBenchmark(){
+        wordsTyped = 0;
+        time = Time.time; 
         MiniMap.SetActive(true);
         StartController.SetActive(false);
         Menu.SetActive(false);
@@ -101,6 +116,10 @@ public class GameManager : MonoBehaviour
         State = 3;
     }
     private void setUpEndScreen(){
+        time = Time.time - time;
+        print(wordsTyped);
+        WPM = wordsTyped/(time/60f);
+        print(WPM);
         MainCamara.SetActive(false);
         MiniMap.SetActive(false);
         AstriodController.SetActive(false);

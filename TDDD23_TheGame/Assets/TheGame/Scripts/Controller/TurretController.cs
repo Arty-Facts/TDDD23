@@ -20,6 +20,7 @@ public class TurretController : BaseController
     private int counter = 0;
 
     private bool endGame = true;
+
     public bool Controlle = true;
     // Start is called before the first frame update
     void Start()
@@ -35,10 +36,14 @@ public class TurretController : BaseController
     IEnumerator StartShooting(){
         yield return new WaitForSeconds(1f);
         while(!Controlle){
-            float dist = Vector3.Distance(Charector.transform.position, selected.transform.position);
+            float dist = 100;
+            if (selected != null)
+                dist = Vector3.Distance(Charector.transform.position, selected.transform.position);
             yield return new WaitForSeconds(dist/400 + Random.Range(0,1));
-            if(selected.GetComponent<Gameplay>().GetText().Length > 0)
-                shoot();
+            if (selected != null)
+                if(selected.GetComponent<Gameplay>().GetText().Length > 0)
+                    shoot();
+            
         }
     }
 
@@ -70,6 +75,7 @@ public class TurretController : BaseController
             }
             
             if (selected.GetComponent<Gameplay>().GetText().Length < 1){
+                selected.GetComponent<Gameplay>().UpdateText();
                 SelectList.Remove(selected);
                 selected.GetComponent<GazeAware>().enabled = false;
                 selected.GetComponent<BaseMovment>().Kill();
@@ -90,6 +96,7 @@ public class TurretController : BaseController
         Controlle = true;
         Higlighter.GetComponent<TextMesh>().text = "";
         selected = null;
+        endGame = true;
     }
     private bool validate(string input){
         if (input[0] != selected.GetComponent<Gameplay>().GetText()[0]){
@@ -136,7 +143,7 @@ public class TurretController : BaseController
     }
     override public void Select(GameObject other){
 
-        if(!Controlle){
+        if(!Controlle){       
             SelectList.Add(other);
 		}else{
             selected = other;
@@ -150,6 +157,9 @@ public class TurretController : BaseController
             gameManager.SwitchState();
             endGame = false;
         }
+    }
+
+    override public void SetUp(){
     }
 
 }
