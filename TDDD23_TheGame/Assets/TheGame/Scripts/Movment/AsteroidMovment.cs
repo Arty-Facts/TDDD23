@@ -9,13 +9,14 @@ public class AsteroidMovment : BaseMovment
     private Vector3 angularVelocity;
     void Start()
     {
-        Thrust = 10000f;
+        Thrust = 1000f;
         angularVelocity = Random.insideUnitSphere;
     }
     override protected void trajectory(){
+        float dist = Vector3.Distance(transform.position, selected.transform.position);
         if (selected != null){
             Vector3 relativePos = selected.position -  transform.position ;
-            GetComponent<Rigidbody>().AddForce(Vector3.Normalize(relativePos) * Thrust * Time.deltaTime);
+            GetComponent<Rigidbody>().AddForce(Vector3.Normalize(relativePos) * (Thrust * (dist/4)) * Time.deltaTime);
         }
         GetComponent<Rigidbody>().angularVelocity = angularVelocity * tumble;
 

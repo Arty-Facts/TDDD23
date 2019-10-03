@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RocketController : BaseController
 {
+    private static GameManager gameManager;
+
     public bool Spawn = true;
     public GameObject ammo;
     private List<GameObject> ammos = new List<GameObject>();
@@ -14,14 +16,21 @@ public class RocketController : BaseController
 
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         selected = GameObject.Find("Target");
         //SetUp();
     }
     override public void SetUp(){
         StartCoroutine(SpawnRockets());
         SleepFore = 5f;
-        SpawnEvery = .5f;
         capacity = 3;
+        SpawnEvery = 0.3f;
+    }
+
+    void Update() {
+        SleepFore = 5f;
+
+        capacity = (int) gameManager.WPM/4;
     }
     
     IEnumerator SpawnRockets(){
@@ -45,9 +54,7 @@ public class RocketController : BaseController
             if (ammos.Count == 0){
                     Spawn = true;
                     SleepFore *= 2;
-                    capacity *= 2;
-
-                }
+            }
         }
     }
 

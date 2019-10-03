@@ -17,10 +17,18 @@ public class GameManager : MonoBehaviour
     public GameObject MiniMap;
     public GameObject EndScreen;
 
-    public int wordsTyped;
+    public EndGameStats endGameStats;
+
+    private int wordsTyped;
+    private int keyTyped;
+    private int correctKeyTyped;
     public float time;
 
     public float WPM;
+    public float KPM;
+    public float CKPM;
+
+    public float ACC;
 
     private int State = 0;
     public void SetState(int newState){
@@ -28,6 +36,11 @@ public class GameManager : MonoBehaviour
     }
     public void AddPoint(){
         wordsTyped += 1;
+    }
+    public void AddPress(){
+        keyTyped += 1;
+    }public void AddCorrectPress(){
+        correctKeyTyped += 1;
     }
 
     public void GoToBenchmark(){
@@ -47,6 +60,13 @@ public class GameManager : MonoBehaviour
     {
         setUpMenu();
     }
+    void Update()
+    {
+        if (State == 0 || State == 3){
+            updateData();
+        }
+    }
+
 
     // Update is called once per frame
     public void SwitchState()
@@ -78,6 +98,7 @@ public class GameManager : MonoBehaviour
         }
     }
     private void setUpMenu(){
+        initData();
         EndScreen.SetActive(false);
         MiniMap.SetActive(false);
         MainCamara.SetActive(false);
@@ -95,8 +116,7 @@ public class GameManager : MonoBehaviour
         TurretController.GetComponent<TurretController>().EnableControlls();
     }
     private void setUpGame(){
-        wordsTyped = 0;
-        time = Time.time; 
+        initData();
         StartController.SetActive(false);
         MiniMap.SetActive(true);
         Menu.SetActive(false);
@@ -105,9 +125,8 @@ public class GameManager : MonoBehaviour
         EnemyController.SetActive(true);
         State = 3;
     }
-    private void setUpBenchmark(){
-        wordsTyped = 0;
-        time = Time.time; 
+    private void setUpBenchmark(){ 
+        initData();
         MiniMap.SetActive(true);
         StartController.SetActive(false);
         Menu.SetActive(false);
@@ -116,10 +135,8 @@ public class GameManager : MonoBehaviour
         State = 3;
     }
     private void setUpEndScreen(){
-        time = Time.time - time;
-        print(wordsTyped);
-        WPM = wordsTyped/(time/60f);
-        print(WPM);
+
+        endGameStats.SetWPM(WPM.ToString());
         MainCamara.SetActive(false);
         MiniMap.SetActive(false);
         AstriodController.SetActive(false);
@@ -127,6 +144,21 @@ public class GameManager : MonoBehaviour
         EndScreen.SetActive(true);
         State = 0;
     }
+    private void initData(){
+        wordsTyped = 0;
+        time = Time.time-10; 
+        keyTyped = 0;
+        correctKeyTyped = 0;
+    }
+    private void updateData(){
+        float t = Time.time - time;
+        WPM = wordsTyped/(t/60f);
+        KPM = keyTyped/(t/60f);
+        CKPM = correctKeyTyped/(t/60f);
+        ACC = (float)correctKeyTyped/keyTyped;
+        print("WPM: " + WPM.ToString() + " | KPM: " + KPM.ToString() + " | CKPM: " + CKPM.ToString() + " | ACC: " + ACC.ToString());
+    }
+
 
 
 }

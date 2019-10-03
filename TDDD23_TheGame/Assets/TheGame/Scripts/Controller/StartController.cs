@@ -37,7 +37,6 @@ public class StartController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //weaponsController.Select(asteroid);
         if (gameplay != null && gameplay.GetText().Length == 0 && StartGame){
             gameManager.SwitchState();
             StartGame = false;

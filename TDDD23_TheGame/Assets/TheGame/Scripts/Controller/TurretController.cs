@@ -42,6 +42,7 @@ public class TurretController : BaseController
             yield return new WaitForSeconds(dist/400 + Random.Range(0,1));
             if (selected != null)
                 if(selected.GetComponent<Gameplay>().GetText().Length > 0)
+                    gameManager.AddPress();
                     shoot();
             
         }
@@ -70,6 +71,7 @@ public class TurretController : BaseController
         if (selected != null){
             target();
             input = Input.inputString;
+
             if (input != "" && validate(input)){
                 shoot();
             }
@@ -99,10 +101,12 @@ public class TurretController : BaseController
         endGame = true;
     }
     private bool validate(string input){
-        if (input[0] != selected.GetComponent<Gameplay>().GetText()[0]){
-            return false; 
+        gameManager.AddPress();
+        if (input[0] == selected.GetComponent<Gameplay>().GetText()[0]){
+            gameManager.AddCorrectPress();
+            return true; 
         }
-        return true;
+        return false;
     }
     private void shoot(){
         if (selected != null){

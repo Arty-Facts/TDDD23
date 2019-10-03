@@ -9,7 +9,7 @@ public class EnemyShipController : BaseController
 
     public GameObject Ship;
     public GameObject Target;  
-    private float SpawnEvery = 1f;
+    private float SpawnEvery;
     public bool Spawn = true;
     private float SpawnRange = 300f;
     private float SpawnVarience = 100;
@@ -23,9 +23,10 @@ public class EnemyShipController : BaseController
     }
 
     IEnumerator SpawnEnemyShips(){
+        yield return new WaitForSeconds(10);
         while(Spawn){
-            yield return new WaitForSeconds(SpawnEvery);
             SpawnOne();
+            yield return new WaitForSeconds(SpawnEvery);
             SpawnEvery *= 2;
         }
     }

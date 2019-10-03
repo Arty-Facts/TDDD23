@@ -10,9 +10,9 @@ public class AsteroidController : BaseController
     private float SpawnEvery = 3f;
     public bool Spawn = true;
     private float SpawnRange = 400f;
-    private float MinRange = 50f;
+    private float MinRange = 30f;
 
-    private int StartCount = 20;
+    private int StartCount = 30;
 
     private int counter = 0;
     // Start is called before the first frame update
@@ -35,12 +35,12 @@ public class AsteroidController : BaseController
     IEnumerator SpawnAstroids(){
         while(Spawn){
             spawnOne();
-            yield return new WaitForSeconds(SpawnEvery);
+            yield return new WaitForSeconds(Mathf.Min(60/gameManager.WPM, 20));
         }
     }
 
     private Vector3 SpawnPosition(){
-        return new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(-10.0f, 30.0f), SpawnRange);
+        return new Vector3(Random.Range(-0.5f*SpawnRange, 0.5f*SpawnRange), Random.Range(-10.0f, 30.0f), SpawnRange);
     }
     private void spawnOne(){
             GameObject astroid = Instantiate(Astroids[counter], SpawnPosition(), Quaternion.identity);
