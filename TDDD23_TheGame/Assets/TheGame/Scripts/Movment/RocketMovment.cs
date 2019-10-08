@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RocketMovment : BaseMovment
 {
-    private float force = 20000;
-    private float rotationSpeed = 10f;
+    private float force = 10000;
+    private float rotationSpeed = 15f;
 
     public RocketController controller;
     public GameObject explotion;
@@ -21,9 +21,9 @@ public class RocketMovment : BaseMovment
         //float dist = Vector3.Distance(selected.position, transform.position);
         float totDist = Mathf.Max(Vector3.Distance(selected.position, transform.position)/10, 10);
         //GetComponent<CapsuleCollider>().radius =  Mathf.Min(dist/totDist, 0.001f) *1000;
-
+        float dist = Vector3.Distance(transform.position, selected.transform.position);
         transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed/totDist * Time.deltaTime );
-        GetComponent<Rigidbody>().AddForce(Vector3.Normalize(transform.forward) * force * Time.deltaTime);
+        GetComponent<Rigidbody>().AddForce(Vector3.Normalize(transform.forward) *  (force + force * (dist/100))* Time.deltaTime);
     }
 
     override protected void goalAchived(){

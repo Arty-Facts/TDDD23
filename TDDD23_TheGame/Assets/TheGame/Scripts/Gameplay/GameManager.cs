@@ -1,6 +1,8 @@
-﻿ using System.Collections;
+﻿using System.Collections;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
+using Tobii.Gaming;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,19 +20,24 @@ public class GameManager : MonoBehaviour
     public GameObject EndScreen;
 
     public EndGameStats endGameStats;
+    private GazePoint gazePoint;
 
     private int wordsTyped;
     private int keyTyped;
     private int correctKeyTyped;
     public float time;
+    public float timeOfScreen;
 
     public float WPM;
     public float KPM;
     public float CKPM;
 
     public float ACC;
+    public float CT;
 
     private int State = 0;
+
+    private Collection saveData;
     public void SetState(int newState){
         State = newState;
     }
@@ -62,7 +69,11 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if (State == 0 || State == 3){
+        
+    }
+    IEnumerator updater(){
+        while(State == 0 || State == 3){
+            yield return new WaitForSeconds(1f);
             updateData();
         }
     }
@@ -84,13 +95,15 @@ public class GameManager : MonoBehaviour
                 setUpMenu();
                 break;
             case 1:
-                setUpBenchmark();
                 break;
             case 2:
                 setUpGame();
                 break;
             case 3:
                 setUpEndScreen();
+                break;
+            case 4:
+                setUpMenu();
                 break;
             default:
                 //Console.WriteLine("Default case");
@@ -106,6 +119,8 @@ public class GameManager : MonoBehaviour
         AstriodController.SetActive(true);
         EnemyController.SetActive(true);
         TurretController.GetComponent<TurretController>().AutoShoot();
+        State = 0;
+        StartCoroutine(updater());
     }
     private void GotoStart(){
         Menu.SetActive(false);
@@ -124,6 +139,7 @@ public class GameManager : MonoBehaviour
         AstriodController.SetActive(true);
         EnemyController.SetActive(true);
         State = 3;
+        StartCoroutine(updater());
     }
     private void setUpBenchmark(){ 
         initData();
@@ -133,22 +149,25 @@ public class GameManager : MonoBehaviour
         MainCamara.SetActive(true);
         AstriodController.SetActive(true);
         State = 3;
+        StartCoroutine(updater());
     }
     private void setUpEndScreen(){
-
         endGameStats.SetWPM(WPM.ToString());
         MainCamara.SetActive(false);
         MiniMap.SetActive(false);
         AstriodController.SetActive(false);
         EnemyController.SetActive(false);
         EndScreen.SetActive(true);
-        State = 0;
+        save();
+        State = 4;
     }
     private void initData(){
         wordsTyped = 0;
         time = Time.time-10; 
         keyTyped = 0;
         correctKeyTyped = 0;
+        timeOfScreen = 0;
+        CT = 0;
     }
     private void updateData(){
         float t = Time.time - time;
@@ -156,8 +175,54 @@ public class GameManager : MonoBehaviour
         KPM = keyTyped/(t/60f);
         CKPM = correctKeyTyped/(t/60f);
         ACC = (float)correctKeyTyped/keyTyped;
-        print("WPM: " + WPM.ToString() + " | KPM: " + KPM.ToString() + " | CKPM: " + CKPM.ToString() + " | ACC: " + ACC.ToString());
+        gazePoint = TobiiAPI.GetGazePoint();
+        if (!gazePoint.IsRecent()){
+            timeOfScreen += Time.smoothDeltaTime;
+        }
+        CT = 1 - (timeOfScreen/ (t+10));
+        
+        //print("WPM: " + WPM + " | KPM: " + KPM + " | CKPM: " + CKPM + " | ACC: " + ACC + " | CT: " + CT);
     }
+
+    private void save(){
+        saveData = JsonUtility.FromJson<Collection>(load());
+        if (saveData == null){
+            saveData = new Collection();
+        }
+        Storing data = new Storing();
+        data.WPM = WPM;
+        data.KPM = KPM;
+        data.CKPM = CKPM;
+        data.ACC = ACC;
+        data.CT  = CT;
+        data.Time = Time.time - time;
+        saveData.items.Add(data);
+        string dataToJason = JsonUtility.ToJson(saveData, true);
+        store(dataToJason);
+        print(dataToJason);
+    }
+    static void store(string data)
+    {
+        string path = "Assets/Resources/score.txt";
+
+        //Write some text to the test.txt file
+        StreamWriter writer = new StreamWriter(path, false);
+        writer.WriteLine(data);
+        writer.Close();
+    }
+ 
+    static string load(){
+    
+        string path = "Assets/Resources/score.txt";
+
+        //Read the text from directly from the test.txt file
+        StreamReader reader = new StreamReader(path); 
+        string data = reader.ReadToEnd();
+        reader.Close();
+        return data;
+    }
+    
+    
 
 
 

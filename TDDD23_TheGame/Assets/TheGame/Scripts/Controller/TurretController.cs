@@ -11,6 +11,8 @@ public class TurretController : BaseController
     public GameObject Charector;
     public GameObject ammo;  
     public GameObject Higlighter; 
+    public GameObject WarningHiglighter; 
+    public GameObject WarningSound;
     private List<GameObject> Turrets = new List<GameObject>();
     private List<GameObject> SelectList = new List<GameObject>();
 
@@ -22,13 +24,15 @@ public class TurretController : BaseController
     private bool endGame = true;
 
     public bool Controlle = true;
+    private bool soundOn = false;
     // Start is called before the first frame update
     void Start()
     {
         Turrets.Add(Instantiate(Turret,  new Vector3(0.82f, 0.07f, 1.7f), Quaternion.identity));
         Turrets.Add(Instantiate(Turret,  new Vector3(0f, -0.08f, 4.1f), Quaternion.identity));
         Turrets.Add(Instantiate(Turret,  new Vector3(-0.82f, 0.07f, 1.7f), Quaternion.identity));
-        Higlighter = Instantiate(Higlighter,  new Vector3(0f, 0f, -10f), Quaternion.identity);
+        Higlighter = Instantiate(Higlighter,  new Vector3(0f, 0f, -5f), Quaternion.identity);
+        WarningHiglighter = Instantiate(WarningHiglighter,  new Vector3(0f, 0f, -5f), Quaternion.identity);
         
         
     }
@@ -39,7 +43,7 @@ public class TurretController : BaseController
             float dist = 100;
             if (selected != null)
                 dist = Vector3.Distance(Charector.transform.position, selected.transform.position);
-            yield return new WaitForSeconds(dist/400 + Random.Range(0,1));
+            yield return new WaitForSeconds(dist/200);
             if (selected != null)
                 if(selected.GetComponent<Gameplay>().GetText().Length > 0)
                     gameManager.AddPress();
@@ -52,22 +56,16 @@ public class TurretController : BaseController
     void Update()
     {   
         string input = "";
+        SelectList.Remove(null);
 
-        if (SelectList.Count != 0 && selected == null){
-            SelectList.Remove(null);
-            GameObject chosen = SelectList[0];
-            float min_dist = Vector3.Distance(Charector.transform.position, chosen.transform.position);
-            foreach(GameObject candidate in SelectList){
-                if (candidate == null)
-                    continue;
-                float dist = Vector3.Distance(Charector.transform.position, candidate.transform.position);
-                if (dist < min_dist){
-                    min_dist = dist;
-                    chosen = candidate;
-                }
-            }
-            selected = chosen;
+        if (!Controlle && SelectList.Count > 0 && selected == null){
+            AutoTarget();
         }
+
+        if (SelectList.Count > 0){
+            Warning();
+        }
+
         if (selected != null){
             target();
             input = Input.inputString;
@@ -84,9 +82,62 @@ public class TurretController : BaseController
                 Higlighter.GetComponent<TextMesh>().text = "";
                 selected = null;
             }
+        }else{
+            Higlighter.transform.Find("Sphere").GetComponent<SphereCollider>().enabled = false;
         }
 
 
+    }
+
+    private void AutoTarget(){
+        GameObject chosen = SelectList[0];
+        if(chosen != null){
+            float min_dist = Vector3.Distance(Charector.transform.position, chosen.transform.position);
+            foreach(GameObject candidate in SelectList){
+                if (candidate == null)
+                    continue;
+                float dist = Vector3.Distance(Charector.transform.position, candidate.transform.position);
+                if (dist < min_dist){
+                    min_dist = dist;
+                    chosen = candidate;
+                }
+            }
+            selected = chosen;
+        }
+
+    }
+
+    private void Warning(){
+        GameObject chosen = SelectList[0];
+        if(chosen != null){
+            float min_dist = Vector3.Distance(Charector.transform.position, chosen.transform.position);
+            foreach(GameObject candidate in SelectList){
+                if (candidate == null)
+                    continue;
+                float dist = Vector3.Distance(Charector.transform.position, candidate.transform.position);
+                if (dist < min_dist){
+                    min_dist = dist;
+                    chosen = candidate;
+                }
+            }
+            if(min_dist < 30f && chosen != selected){
+                if(!soundOn){
+                    WarningSound.GetComponent<AudioSource>().Play();
+                }
+                Vector3 dir = chosen.transform.position - Charector.transform.position;
+                WarningHiglighter.transform.position = Vector3.Lerp(WarningHiglighter.transform.position, Charector.transform.position + 5f* Vector3.Normalize(dir),  speed * Time.deltaTime);
+                WarningSound.transform.position = chosen.transform.position;
+                soundOn = true;
+            }else{
+                WarningSound.GetComponent<AudioSource>().Stop();
+                WarningHiglighter.transform.position = new Vector3(0f, 0f, -5f);
+                WarningSound.transform.position = new Vector3(0f, 0f, -5f);
+                soundOn = false;
+            }
+            Vector3 lookPos = WarningHiglighter.transform.position - Charector.transform.position;
+            WarningHiglighter.transform.LookAt(Charector.transform.position);
+
+        }
     }
 
     public void AutoShoot(){
@@ -146,12 +197,14 @@ public class TurretController : BaseController
 
     }
     override public void Select(GameObject other){
-
-        if(!Controlle){       
-            SelectList.Add(other);
-		}else{
+        if(Controlle){       
             selected = other;
+            Higlighter.transform.Find("Sphere").GetComponent<SphereCollider>().enabled = true;
         }
+    }
+
+    public void ImIn(GameObject other){
+        SelectList.Add(other);
     }
     public void Hitt(GameObject obj){
 

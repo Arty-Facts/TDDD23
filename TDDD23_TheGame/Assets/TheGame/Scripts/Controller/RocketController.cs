@@ -22,15 +22,16 @@ public class RocketController : BaseController
     }
     override public void SetUp(){
         StartCoroutine(SpawnRockets());
-        SleepFore = 5f;
+        SleepFore = 10f;
         capacity = 3;
         SpawnEvery = 0.3f;
     }
 
     void Update() {
-        SleepFore = 5f;
+        //SleepFore = 5f;
 
-        capacity = (int) gameManager.WPM/4;
+        capacity = (int) Mathf.Max((gameManager.WPM*0.2f)/2, 1);
+        
     }
     
     IEnumerator SpawnRockets(){
@@ -53,7 +54,7 @@ public class RocketController : BaseController
             yield return new WaitForSeconds(SleepFore);
             if (ammos.Count == 0){
                     Spawn = true;
-                    SleepFore *= 2;
+                    //SleepFore *= 2;
             }
         }
     }

@@ -21,9 +21,8 @@ public class TurretSelectOnGaze : MonoBehaviour
 		// }else{
 		// 	weaponsController.autoSelector = false;
 		// }
-		if(!weaponsController.Controlle){
-			weaponsController.Select(gameObject);
-		}
+		weaponsController.ImIn(gameObject);
+
 	}
 	
 	// Update is called once per frame
