@@ -5,12 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class Storing
 {
-    public float WPM;
-    public float KPM;
-    public float CKPM;
+    public float WPM = 0;
+    public float KPM = 0;
+    public float CKPM = 0;
 
-    public float ACC;
-    public float CT;
+    public float ACC = 0;
+    public float CT = 0;
 
-    public float Time;
+    public float Time = 0;
 }

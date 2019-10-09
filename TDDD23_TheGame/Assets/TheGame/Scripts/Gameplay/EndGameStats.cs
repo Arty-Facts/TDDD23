@@ -11,8 +11,8 @@ public class EndGameStats : MonoBehaviour
     {
         
     }
-    public void SetWPM(string wpm){
-        Wpm.text = "WPM: " + wpm;
+    public void SetF1(string f1){
+        Wpm.text = "F1 Score: " + f1;
     }
 
     // Update is called once per frame

@@ -19,14 +19,17 @@ public class GameManager : MonoBehaviour
     public GameObject MiniMap;
     public GameObject EndScreen;
 
-    public EndGameStats endGameStats;
+    public Window_Graph graph;
+
     private GazePoint gazePoint;
 
     private int wordsTyped;
     private int keyTyped;
     private int correctKeyTyped;
     public float time;
-    public float timeOfScreen;
+    public float ticksOfScreen;
+    public float ticks;
+
 
     public float WPM;
     public float KPM;
@@ -69,7 +72,11 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        
+        gazePoint = TobiiAPI.GetGazePoint();
+        ticks += Time.deltaTime;
+        if (!gazePoint.IsRecent()){
+            ticksOfScreen += Time.deltaTime;
+        }
     }
     IEnumerator updater(){
         while(State == 0 || State == 3){
@@ -95,6 +102,7 @@ public class GameManager : MonoBehaviour
                 setUpMenu();
                 break;
             case 1:
+                setUpBenchmark();
                 break;
             case 2:
                 setUpGame();
@@ -152,13 +160,14 @@ public class GameManager : MonoBehaviour
         StartCoroutine(updater());
     }
     private void setUpEndScreen(){
-        endGameStats.SetWPM(WPM.ToString());
+        EndScreen.SetActive(true);
+        TurretController.GetComponent<TurretController>().Disable();
         MainCamara.SetActive(false);
         MiniMap.SetActive(false);
         AstriodController.SetActive(false);
         EnemyController.SetActive(false);
-        EndScreen.SetActive(true);
         save();
+        graph.ShowGraph(saveData.items);
         State = 4;
     }
     private void initData(){
@@ -166,7 +175,8 @@ public class GameManager : MonoBehaviour
         time = Time.time-10; 
         keyTyped = 0;
         correctKeyTyped = 0;
-        timeOfScreen = 0;
+        ticksOfScreen = 0;
+        ticks = 0;
         CT = 0;
     }
     private void updateData(){
@@ -174,14 +184,12 @@ public class GameManager : MonoBehaviour
         WPM = wordsTyped/(t/60f);
         KPM = keyTyped/(t/60f);
         CKPM = correctKeyTyped/(t/60f);
-        ACC = (float)correctKeyTyped/keyTyped;
-        gazePoint = TobiiAPI.GetGazePoint();
-        if (!gazePoint.IsRecent()){
-            timeOfScreen += Time.smoothDeltaTime;
-        }
-        CT = 1 - (timeOfScreen/ (t+10));
+        ACC = 0f;
+        if (keyTyped != 0)
+            ACC = (float)correctKeyTyped/keyTyped;
+        CT = 1 - (ticksOfScreen/ (ticks));
         
-        //print("WPM: " + WPM + " | KPM: " + KPM + " | CKPM: " + CKPM + " | ACC: " + ACC + " | CT: " + CT);
+        print("WPM: " + WPM + " | KPM: " + KPM + " | CKPM: " + CKPM + " | ACC: " + ACC + " | CT: " + CT);
     }
 
     private void save(){

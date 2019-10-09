@@ -218,5 +218,13 @@ public class TurretController : BaseController
 
     override public void SetUp(){
     }
+    public void Disable() {
+        WarningSound.GetComponent<AudioSource>().Stop();
+        SelectList.Clear();
+        //Controlle = false;
+        Higlighter.GetComponent<TextMesh>().text = "";
+        selected = null;
+        
+    }
 
 }
