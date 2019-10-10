@@ -30,7 +30,7 @@ public class RocketController : BaseController
     void Update() {
         //SleepFore = 5f;
 
-        capacity = (int) Mathf.Max((gameManager.WPM*0.2f)/2, 1);
+        capacity = (int) Mathf.Max((gameManager.WPM*0.2f), 1);
         
     }
     

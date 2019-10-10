@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.IO;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Tobii.Gaming;
 
@@ -189,11 +190,17 @@ public class GameManager : MonoBehaviour
             ACC = (float)correctKeyTyped/keyTyped;
         CT = 1 - (ticksOfScreen/ (ticks));
         
-        print("WPM: " + WPM + " | KPM: " + KPM + " | CKPM: " + CKPM + " | ACC: " + ACC + " | CT: " + CT);
+        //print("WPM: " + WPM + " | KPM: " + KPM + " | CKPM: " + CKPM + " | ACC: " + ACC + " | CT: " + CT);
     }
 
     private void save(){
-        saveData = JsonUtility.FromJson<Collection>(load());
+        try {
+            saveData = JsonUtility.FromJson<Collection>(load());
+        }
+        catch (Exception e) {
+            saveData = null;
+        } 
+        
         if (saveData == null){
             saveData = new Collection();
         }
@@ -207,7 +214,7 @@ public class GameManager : MonoBehaviour
         saveData.items.Add(data);
         string dataToJason = JsonUtility.ToJson(saveData, true);
         store(dataToJason);
-        print(dataToJason);
+        //print(dataToJason);
     }
     static void store(string data)
     {

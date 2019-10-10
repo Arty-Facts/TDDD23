@@ -27,7 +27,7 @@ public class EnemyShipController : BaseController
         while(Spawn){
             SpawnOne();
             yield return new WaitForSeconds(SpawnEvery);
-            SpawnEvery *= 2;
+            SpawnEvery *= 1.8f;
         }
     }
 

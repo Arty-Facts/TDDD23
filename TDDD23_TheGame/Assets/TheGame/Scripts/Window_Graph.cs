@@ -31,7 +31,7 @@ public class Window_Graph : MonoBehaviour {
         float ACC = ShowGraphACC(valueList);
         float CT = ShowGraphCT(valueList);
         float Time = ShowGraphTime(valueList);
-        print(WPM +","+  ACC +","+  CT +","+  Time);
+        //print(WPM +","+  ACC +","+  CT +","+  Time);
         float f1 = 4*(WPM * ACC * CT * Time)/(WPM + ACC + CT + Time);
         //endGameStats.SetF1(f1.ToString("F3"));
         F1.GetComponent<RectTransform>().anchoredPosition = new Vector2(1125f, graphContainer.sizeDelta.y*f1 + 30);
@@ -61,7 +61,7 @@ public class Window_Graph : MonoBehaviour {
             }
             lastCircleGameObject = circleGameObject;
         }
-        wpm.GetComponent<RectTransform>().anchoredPosition = new Vector2(graphWidth+100, yPosition+40);
+        //wpm.GetComponent<RectTransform>().anchoredPosition = new Vector2(graphWidth+100, yPosition+40);
         wpm.GetComponent<Text>().text = "WPM: " + valueList[valueList.Count-1].WPM.ToString("F2");
         return yPosition/graphHeight;
     }
@@ -69,7 +69,7 @@ public class Window_Graph : MonoBehaviour {
         float graphHeight = graphContainer.sizeDelta.y;
         float graphWidth = graphContainer.sizeDelta.x;
         float yMaximum = 0f;
-        float yMinimum = 999999999f;        
+        float yMinimum = 1f;        
         for (int i = 0; i < valueList.Count; i++) {
             yMaximum = Mathf.Max(valueList[i].ACC, yMaximum);
             yMinimum = Mathf.Min(valueList[i].ACC, yMinimum);
@@ -86,7 +86,7 @@ public class Window_Graph : MonoBehaviour {
             }
             lastCircleGameObject = circleGameObject;
         }
-        acc.GetComponent<RectTransform>().anchoredPosition = new Vector2(graphWidth+100, yPosition+40);
+        //acc.GetComponent<RectTransform>().anchoredPosition = new Vector2(graphWidth+100, yPosition+40);
         acc.GetComponent<Text>().text = "ACC: " + valueList[valueList.Count-1].ACC.ToString("F2");
         return yPosition/graphHeight;
     }
@@ -94,7 +94,7 @@ public class Window_Graph : MonoBehaviour {
         float graphHeight = graphContainer.sizeDelta.y;
         float graphWidth = graphContainer.sizeDelta.x;
         float yMaximum = 0f;
-        float yMinimum = 1f;        
+        float yMinimum = 0.6f;        
         for (int i = 0; i < valueList.Count; i++) {
             yMaximum = Mathf.Max(valueList[i].CT, yMaximum);
             yMinimum = Mathf.Min(valueList[i].CT, yMinimum);
@@ -111,7 +111,7 @@ public class Window_Graph : MonoBehaviour {
             }
             lastCircleGameObject = circleGameObject;
         }
-        ct.GetComponent<RectTransform>().anchoredPosition = new Vector2(graphWidth+100, yPosition+40);
+        //ct.GetComponent<RectTransform>().anchoredPosition = new Vector2(graphWidth+100, yPosition+40);
         ct.GetComponent<Text>().text = "CT: " + valueList[valueList.Count-1].CT.ToString("F2");
         
         return yPosition/graphHeight;
@@ -119,8 +119,8 @@ public class Window_Graph : MonoBehaviour {
     public float ShowGraphTime(List<Storing> valueList) {
         float graphHeight = graphContainer.sizeDelta.y;
         float graphWidth = graphContainer.sizeDelta.x;
-        float yMaximum = 0f;
-        float yMinimum = 999999999f;        
+        float yMaximum = 180f;
+        float yMinimum = 0f;        
         for (int i = 0; i < valueList.Count; i++) {
             yMaximum = Mathf.Max(Mathf.Min(valueList[i].Time, 180), yMaximum);
             yMinimum = Mathf.Min(valueList[i].Time, yMinimum);
@@ -137,7 +137,7 @@ public class Window_Graph : MonoBehaviour {
             }
             lastCircleGameObject = circleGameObject;
         }
-        time.GetComponent<RectTransform>().anchoredPosition = new Vector2(graphWidth+100, yPosition+40);
+        //time.GetComponent<RectTransform>().anchoredPosition = new Vector2(graphWidth+100, yPosition+40);
         time.GetComponent<Text>().text = "Time: " + valueList[valueList.Count-1].Time.ToString("F1") + "s";
         return yPosition/graphHeight;
     }

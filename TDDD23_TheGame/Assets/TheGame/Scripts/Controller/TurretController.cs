@@ -28,9 +28,9 @@ public class TurretController : BaseController
     // Start is called before the first frame update
     void Start()
     {
-        Turrets.Add(Instantiate(Turret,  new Vector3(0.82f, 0.07f, 1.7f), Quaternion.identity));
+        Turrets.Add(Instantiate(Turret,  new Vector3(0.82f, 0.07f, 1.75f), Quaternion.identity));
         Turrets.Add(Instantiate(Turret,  new Vector3(0f, -0.08f, 4.1f), Quaternion.identity));
-        Turrets.Add(Instantiate(Turret,  new Vector3(-0.82f, 0.07f, 1.7f), Quaternion.identity));
+        Turrets.Add(Instantiate(Turret,  new Vector3(-0.82f, 0.07f, 1.75f), Quaternion.identity));
         Higlighter = Instantiate(Higlighter,  new Vector3(0f, 0f, -5f), Quaternion.identity);
         WarningHiglighter = Instantiate(WarningHiglighter,  new Vector3(0f, 0f, -5f), Quaternion.identity);
         
@@ -153,9 +153,17 @@ public class TurretController : BaseController
     }
     private bool validate(string input){
         gameManager.AddPress();
-        if (input[0] == selected.GetComponent<Gameplay>().GetText()[0]){
-            gameManager.AddCorrectPress();
-            return true; 
+        if (false){
+            if (input != " "){
+                gameManager.AddCorrectPress();
+                return true; 
+            }
+        }else{
+            if (input[0] == selected.GetComponent<Gameplay>().GetText()[0]){
+                gameManager.AddCorrectPress();
+                return true;
+            }
+
         }
         return false;
     }

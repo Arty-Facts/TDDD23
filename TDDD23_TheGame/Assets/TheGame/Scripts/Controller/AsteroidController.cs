@@ -10,9 +10,9 @@ public class AsteroidController : BaseController
     private float SpawnEvery = 3f;
     public bool Spawn = true;
     private float SpawnRange = 400f;
-    private float MinRange = 35f;
+    private float MinRange = 40f;
 
-    private int StartCount = 30;
+    private int StartCount = 20;
 
     private int counter = 0;
     // Start is called before the first frame update
@@ -35,7 +35,7 @@ public class AsteroidController : BaseController
     IEnumerator SpawnAstroids(){
         while(Spawn){
             spawnOne();
-            yield return new WaitForSeconds(Mathf.Min(60/(gameManager.WPM), 20f));
+            yield return new WaitForSeconds(Mathf.Min(60/(gameManager.WPM*1.2f), 20f));
         }
     }
 
